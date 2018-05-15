@@ -1,0 +1,24 @@
+body{
+    background-color:#D9534F !important;
+    text-align: center;
+}
+
+.conti{
+    
+    width:40%;
+    height:400px;
+}
+
+.tit{
+    background-color:#CECECE;
+}
+
+#alerta{
+    background-image: url("/dist/images/Game-Over.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:215px;
+    height:215px;
+    margin:auto;
+}

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+{% block title %} Modificar dades {% endblock %}
+
+{% block extra-head %}
+  {% load static %}  
+  <link href="{% static "css/SignUp.css" %}" rel="stylesheet">
+  <script src="{% static "js/ModiUsu.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Centro Mail</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
+            {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            <li class="margentop">
+            <!--<div class=" input-group input-header">--> 
+            <!--formulari - METHOD:GET --> 
+                <form action="{% url "jocs:search" %}" method="get" > 
+                    <div class=" input-group-btn">
+                        <span class=".glyphicon .glyphicon-search"></span>
+                        <input type="text" id="input-titol" name="q" class="form-control" placeholder="Que busques?" aria-label="...">
+                    </div>
+                </form>
+            <!--Missatge errors -->                 
+                 {% if field.errors %}		        	
+        	     <div class="alert alert-danger">
+        	        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        	        <ul>
+        	          {% for error in field.errors%}
+        	              <li>{{ error }}</li>
+        		      {% endfor %}
+                    </ul>
+             	</div>
+            {% endif %}
+            <!--</div>--> 
+            </li>
+         </ul>
+        <!--comprovem autenticació usuari-->
+           {% if user.is_authenticated %}
+            <!--<div id="user">-->
+                <ul class="nav navbar-nav navbar-right">
+                      <!--<div class="btn-group">-->
+                        <li class="btn">
+                            <p><span class="glyphicon glyphicon-piggy-bank"></span> {{user.usuari.monedes}}</p>
+                        </li>
+                        <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
+                          <li class="divider"></li>
+                          <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
+                        </ul>
+                      <!--</div>-->
+                </ul>
+          <!--</div>-->
+            {% else %}
+            <div id="user">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url "usuaris:login" %}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                </ul>
+            </div>
+            {% endif %}
+         </div><!--/.nav-collapse -->
+        </div> 
+     </nav>
+        
+        <div class="contingut-usr">
+              
+          <div class="row add">
+             <div class="infor">
+               
+                <div class="esquerra">
+                   <div id="img-user"></div>
+                   <input type="file" id="browse" name="filename" accept="image/gif, image/jpeg, image/png, image/jpg">
+                </div> 
+          
+                <div id="content-login">
+                  <!--FORMULARI-->
+                  <form id="cont-log" action="" method="POST" enctype="media/form-data">
+                      {%csrf_token%}
+                  
+                    <!--pintem resultat-->    
+                    {% for field in formUsuari.visible_fields %}
+  	                  <div class="form-group">
+                 	       {{ field }}
+                 	       
+                 	       {% if field.help_text %}
+          	              <p class="hidden-xs"><em>{{ field.help_text }}</em></p> 
+          	             {% endif %}
+              		       
+              		       {% if field.errors %}		        	
+              			        <div class="alert alert-danger">
+              			          <button type="button" class="close" data-dismiss="alert">&times;</button>
+              				        <ul>
+              				          {% for error in field.errors%}
+              				          <li>{{ error }}</li>
+              			              {% endfor %}
+              			           </ul>
+              		         	</div>
+              		        {% endif %}
+              		    </div>        
+                   {% endfor %}
+                   <!--
+                 {% for field in formPerfil.visible_fields %}
+  	              <div class="form-group">
+                    {{ field }}
+                    
+      	            {% if field.help_text %}
+      	              <p class="hidden-xs"><em>{{ field.help_text }}</em></p> 
+      	            {% endif %}
+        		        {% if field.errors %}		        	
+        			        <div class="alert alert-danger">
+        			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        				        <ul>
+        				          {% for error in field.errors%}
+        				          <li>{{ error }}</li>
+        			            {% endfor %}
+        			          </ul>
+        		         	</div>
+        		        {% endif %}
+      	        </div>        
+               {% endfor %}-->    
+                <br><br>
+                 <!-- <div class="g-recaptcha boot" data-sitekey="6Le8-xUUAAAAAEaaToGX4VZV_DPLvLK4C0PJnUQX"></div>-->
+                 <br><br>
+                  <button id="botoncito" type="submit" class="formulari boto btn btn-success"><span class=" glyphicon glyphicon-floppy-disk"></span> Guardar canvis</button>
+                 <br />
+                </form> 
+              </div>
+            </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+{% block extra-body %}
+  {% load static %}
+
+{% endblock %}
+
+

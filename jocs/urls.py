@@ -1,7 +1,7 @@
 from django.conf.urls import url
-from articles import views
+from jocs import views
 
-app_name='articles'
+app_name='jocs'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),

@@ -15,6 +15,6 @@ class Joc(models.Model):
 
 
 class Comprat(models.Model):
-    usuari = models.ForeignKey(User)
-    joc = models.ForeignKey(Joc, related_name='joc_comprat')
+    usuari = models.ForeignKey(Usuari)
+    joc = models.ForeignKey(Joc)
     completat = models.BooleanField(default=False)

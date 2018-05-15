@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+    {% if messages %}
+        <!--<ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>-->
+    {% endif %}
+    
+    {% block title %} Botiga o algu {% endblock %}
+
+{% block extra-head %}
+    {% load static %}  
+    <script src="{% static "js/index.js" %}"></script>
+    <script src="../../../dist/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="../../../dist/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../../../dist/css/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Centro Mail</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
+            {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            <li class="margentop">
+            <!--<div class=" input-group input-header">--> 
+            <!--formulari - METHOD:GET --> 
+                <form action="{% url "jocs:search" %}" method="get" > 
+                    <div class=" input-group-btn">
+                        <span class=".glyphicon .glyphicon-search"></span>
+                        <input type="text" id="input-titol" name="q" class="form-control" placeholder="Que busques?" aria-label="...">
+                    </div>
+                </form>
+            <!--Missatge errors -->                 
+                 {% if field.errors %}		        	
+        	     <div class="alert alert-danger">
+        	        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        	        <ul>
+        	          {% for error in field.errors%}
+        	              <li>{{ error }}</li>
+        		      {% endfor %}
+                    </ul>
+             	</div>
+            {% endif %}
+            <!--</div>--> 
+            </li>
+         </ul>
+        <!--comprovem autenticació usuari-->
+           {% if user.is_authenticated %}
+            <!--<div id="user">-->
+                <ul class="nav navbar-nav navbar-right">
+                      <!--<div class="btn-group">-->
+                        <li class="btn">
+                            <p><span class="glyphicon glyphicon-piggy-bank"></span> {{user.usuari.monedes}}</p>
+                        </li>
+                        <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
+                          <li class="divider"></li>
+                          <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
+                        </ul>
+                      <!--</div>-->
+                </ul>
+          <!--</div>-->
+            {% else %}
+            <div id="user">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url "usuaris:login" %}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                </ul>
+            </div>
+            {% endif %}
+         </div><!--/.nav-collapse -->
+        </div> 
+     </nav>
+     <div class="col-md-4">
+
+    </div>
+    <div class="container theme-showcase" role="main">
+        
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div id="contingut">
+        <div class="page-header items">
+          <!--cercador -->
+        
+        {% for joc in llista_jocs %}
+         <div class="item" data-usuari="nose"> 
+             <a href="{% url "jocs:joc" joc.pk %}"><img src="{%if joc.imatge %}{{joc.imatge.url}}{% endif%}"  class="img-responsive hq" ></a>
+               
+              <div class="preu" id="preu1">{{ joc.preuE }} € </div>
+              <div class="preug" id="preu1">{{ joc.preuG }} G </div>
+              <!-- <div class="titol" id="titol1"><h4> {{ joc.nom }} </h4></div> -->
+            </div>
+        {% endfor %}
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
+    
+     <!-- Footer -->
+    <nav class="navbar navbar-inverse footer">
+      <div id="concurs">
+      </div>
+     <div id="adalt">
+         <span class="glyphicon glyphicon-menu-up" title="amunt" aria-hidden="true"></span>
+     </div>
+     <!--<div id="peu">
+       
+       <div id="foot">
+          <dl class="dl-horizontal">
+          </dl>
+        </div>
+        <div id="drets">
+        </div>
+     </div>-->
+     
+     {% if user.is_authenticated %}
+     <div id="contact" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title titol-modal">Enviar missatge a </h4>
+                        </div>
+                        <div class="modal-body">
+                            <textarea rows="4" cols="50"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel·lar</button>
+                            <button id="YES" type="button" class="okReservar btn btn-success" data-dismiss="modal">Enviar</button>
+                        </div>
+                    </div>
+
+                </div>
+    </div>
+    {% else %}
+    <div id="contact" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="form-group">
+                              <center><font color="black">Inicia sessió per contactar amb aquest usuari!</font></center>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Sortir</button>
+                            <a href="#"> <button id="YES" type="button" class="okReservar btn btn-success">Loguejar-se</button></a>
+                            
+                        </div>
+                    </div>
+
+                </div>
+    </div>
+    {% endif %}
+    </nav>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../dist/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+ {% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %} Entrar {% endblock %}
+
+{% block extra-head %}
+    {% load static %}
+    <link href="{% static "css/login.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}   
+
+{% block content %}
+      
+      
+      <div id="content-login">
+            <form id="cont-log" action="" method="POST">
+              {%csrf_token%}
+
+            {% if form.non_field_errors %}
+              <div class="row" style="background-color:{% cycle '#f5f5f5' 'white' %}">
+                  <div class="alert alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {% for error in form.non_field_errors %}
+                  {{error}}
+                {% endfor %}
+                 </div>
+                </div>
+               {% endif %}
+        
+                {% for hidden in form.hidden_fields %}
+                  {{ hidden }}
+                {% endfor %}    
+
+                {% for field in form.visible_fields %}
+
+	              <div class="form-group">
+                    
+      	            {{ field }}
+      	            {% if field.help_text %}
+      	            {% endif %}
+      		        {% if field.errors %}		        	
+      			        <div class="alert alert-danger">
+      			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      				        <ul>
+      				          {% for error in field.errors%}
+      				          <li>{{ error }}</li>
+      			              {% endfor %}
+      			            </ul>
+      		         	</div>
+      		        {% endif %}
+      	        </div>        
+               {% endfor %}
+
+
+              <br><br>
+              <input type="submit" class="formulari boto btn btn-success" value="Entra">
+              <div id="crear"><a href="{% url "usuaris:crear_usuari" %}"> No tens compte? Crea-la </a></div>
+            </form> 
+            <div id="o">o</div>
+            <div id="label-entra">Entra amb:</div>
+            <div id="social">
+                <!--<div class="social-logo" id="facebook" onclick="window.location = '#';"></div>
+                <div class="social-logo" id="twitter" onclick="window.location = '#';"></div>
+                <div class="social-logo" id="google"  onclick="window.location = '#';"></div>-->
+            </div>
+          
+      </div>
+
+{% endblock %}    
+    

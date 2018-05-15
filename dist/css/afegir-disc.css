@@ -1,0 +1,37 @@
+.disc{
+    width:87%;
+    margin:auto;
+}
+
+
+@media only screen and (min-width:900px){
+        /* styles for browsers larger than 960px; */
+      .disc{
+            width:80%;
+            margin:auto;
+        }
+        
+        .contingut-disc{
+             width:70%;   
+             float:left;
+             margin-left:150px;
+             margin-top:25px;
+        }
+
+  
+}
+
+@media only screen and (max-width:899px){
+       /* default iPad screens */
+       
+        .disc{
+            width:100%;
+            
+        }
+        
+        .contingut-disc{
+             width:100%;   
+        }
+       
+     
+    }

@@ -1,0 +1,77 @@
+body{
+    background-image:url("../images/vinParet.jpg");
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:auto;
+}
+
+#content-login{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+   
+    margin:auto;
+    margin-top:40px;
+    background:rgba(0,0,0,0.5);
+    padding:20px;
+    border-radius:5px;
+}
+
+h1{
+    color:white;
+    text-align: center;
+}
+
+.formulari{
+    margin:10px;
+    padding:15px;
+    width: 100%;
+    margin: auto;
+}
+
+#cont-log{
+    width:85%;
+    margin-bottom: 10px;
+}
+
+textarea{
+    border-radius:4px;
+    border:1px solid #7C7C7C;
+}
+
+#miss{
+    margin:auto;
+    background-image: url('/dist/images/mail.png');
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:cover;
+}
+
+@media only screen and (min-width:900px){
+        /* styles for browsers larger than 900px; */
+        
+        #content-login{
+             width:45%;
+        }
+        
+        #miss{
+            width:250px;
+            height:250px;
+        }
+       
+}
+
+@media only screen and (max-width:899px){
+        /* styles for browsers larger than 900px; */
+        
+        #content-login{
+             width:100%;
+        }
+        
+        #miss{
+            width:150px;
+            height:150px;
+        }
+       
+}

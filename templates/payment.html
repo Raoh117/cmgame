@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+ 
+ {% block title %} PAGAMENT {% endblock %}
+ 
+{% block extra-head %} 
+  {% load static %}
+    <script src="{% static "js/index.js" %}"></script>
+{% endblock %}
+
+{% block content  %}
+
+    <!-- Fixed navbar -->
+<div class="container">
+
+<!--INFORMACIÓ DEL VINIL -->
+<div class="container theme-showcase info-usr" role="main">
+  <center>
+    <div id="contingut-reco">
+     <div class="container-fluid">
+                    <div class="row"> <!-- Give this div your desired background color -->
+                        <div class="container1">
+                            <div class="desc">
+                                <div id="content-login">
+                                    <h2 style="color:red">PREU:{{carretilla.preu_total}}</h2>
+                                    <p style="color:red">ACCEDEIX A PAYPAL</p>
+                                    {{form.render}}
+                                </div>
+                                
+                            </div>
+                          </div>
+                          <div class="container1">
+                                  <div>
+                                    <h2> O AMB MONEDES: {{carretilla.preuG_total}}</h2>
+                                    <a href="{% url "usuaris:pagat" carretilla.pk %}" >Pagar amb G</a>
+                                </div>
+                          </div>
+                    </div>
+                    
+                    <div>
+                        {% if field.errors %}		        	
+      			        <div class="alert alert-danger">
+      			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      				        <ul>
+      				          {% for error in field.errors%}
+      				          <li>{{ error }}</li>
+      			              {% endfor %}
+      			            </ul>
+      		         	</div>
+      		        {% endif %}
+                    </div>
+    </div>
+    </div>
+    </center>
+</div>
+
+{% endblock %}
+
+
+
+
+
+

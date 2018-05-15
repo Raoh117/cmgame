@@ -1,0 +1,137 @@
+body{
+    background-image:url("../images/fondologin.png");
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.infor{
+    display:flex;
+    flex-direction: row;
+}
+
+#cont-log{
+    width:90%;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    padding-top:20px;
+}
+
+.formulari{
+    margin:10px;
+    padding:15px;
+    width: 100%;
+    margin: auto;
+}
+
+#content-login{
+    background:rgba(0,0,0,0.5);
+}
+
+
+
+#crear > a{
+     color:white;
+}
+
+.social-logo{
+    width:40px;
+    height:40px;
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size: cover;
+    cursor:pointer;
+}
+
+.social-logo:hover{
+    transform:scale(1.1);
+}
+
+#label-entra{
+    color:white;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+}
+
+#o{
+    color:white;
+    display:flex;
+    justify-content:center;
+    margin:auto
+    
+}
+
+#id_username, #id_password{
+    width:100%;
+    margin:auto;
+    padding:15px;
+    opacity:0.8;
+}
+
+#id_password:focus{
+    opacity:1;
+}
+
+#id_username:focus{
+    opacity:1;
+}
+
+#facebook{
+    background-image:url("../images/icon-facebook.png");
+}
+
+#twitter{
+    background-image:url("../images/icon-twitter.png");
+}
+
+#google{
+    background-image:url("../images/icon-google.png");
+}
+@media only screen and (min-width:900px){
+        /* styles for browsers larger than 900px; */
+       #content-login{
+            width:40%;
+            height:400px;
+            margin:auto;
+            border-radius:4px;
+            display:flex;
+            flex-direction:column;
+            background:rgba(0,0,0,0.5);
+        }
+         
+        #crear{
+            margin:auto;
+            margin-top:20px;
+        }    
+  
+        #social{
+            display:flex;
+            flex-direction:row;
+            justify-content:space-around;
+            margin-bottom:10px;
+        }
+}
+
+
+@media only screen and (max-width:899px){
+        #crear{
+            margin:auto;
+           
+        }
+        
+        #social{
+        display:flex;
+        flex-direction:row;
+        justify-content:space-around;
+        padding-bottom:5px;
+        padding-top:15px;
+    }
+}
+
+

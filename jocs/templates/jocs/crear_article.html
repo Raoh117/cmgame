@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+  {% block title %} Afegir disc {% endblock %}
+
+{% block extra-head %}
+{% load static %}
+<script src="{% static "js/afegir_disc.js" %}"></script>
+<link href="{% static "css/afegir-disc.css" %}" rel="stylesheet">
+<link href="{% static "css/SignUp.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
+<link href="{% static "css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Centro Mail</a>
+        </div>
+         <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
+            <li><div class="input-group input-header">
+            <!--formulari - METHOD:GET --> 
+            <form action="{% url "jocs:search" %}" method="get" > 
+                
+                
+                <div class="input-group-btn">
+                    <span class=".glyphicon .glyphicon-search"></span>
+                    <input type="text" id="input-titol" name="q" class="form-control" placeholder="Que busques?" aria-label="...">
+                 <!--SELECCIÓ -->                    
+                </div>
+            </form>
+            <!--Missatge errors -->                 
+             {% if field.errors %}		        	
+    	     <div class="alert alert-danger">
+    	        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    	        <ul>
+    	          {% for error in field.errors%}
+    	              <li>{{ error }}</li>
+    		      {% endfor %}
+                </ul>
+         	</div>
+            {% endif %}
+        		        
+            </div></li>
+         </ul>
+         
+        <!--comprovem autenticació usuari-->
+           {% if user.is_authenticated %}
+            <div id="user">
+                <ul class="nav navbar-nav">
+                      <div class="btn-group">
+                        <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
+                          <li class="divider"></li>
+                          <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
+                        </ul>
+                      </div>
+                </ul>
+          </div>
+            {% else %}
+            <div id="user">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url "usuaris:login" %}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                </ul>
+            </div>
+            {% endif %}
+
+         </div><!--/.nav-collapse -->
+    </nav>
+    
+    <!--contingut usuari-amos al meollo!!!-->
+     
+        <div class="contingut-usr">
+    
+          <div class="row usr-menu">
+           
+            <div class="col-xs-3">
+              <div class="panel panel-default menu-usr">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Menú</div>
+                <!-- List group -->
+                  <div class="list-group">
+                    <a href="{% url "usuaris:menu_usuari" %}" class="list-group-item"><span class="glyphicon glyphicon-user"></span> Menú</a>
+                  </div>
+                  
+              </div>
+            </div>
+          </div>
+              
+              <div class="row add disc">
+                <div class="contingut-disc">
+                    <div id="titol-puja"><h3>Pujar Joc</h3></div>
+
+                    <div id="img-dsk"></div>
+
+
+                        <form id="puja-disc" method ="post" action="" enctype = "multipart/form-data">
+                         {% csrf_token %}
+                         {% for field in form.visible_fields %}
+                      	    <div class="form-group">
+                               {{ field.label_tag }}                      	             
+                               {{ field }}
+                            </div>
+                                
+                        <!--Missatge errors -->                 
+                            {% if field.errors %}		        	
+                			        <div class="alert alert-danger">
+                			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                				        <ul>
+                				          {% for error in field.errors%}
+                				              <li>{{ error }}</li>
+                			              {% endfor %}
+                			            </ul>
+                		         	</div>
+                		        {% endif %}
+                        {% endfor %}  
+
+                     
+                     
+                     
+                        <div id="pujar">
+                           
+                            <div id="botons-disc">
+                              <button type="submit" class="btn btn-success envia">Enviar</button>
+                           </div>
+                        </div>
+                      </form>
+                    </div>  
+                  </div>
+
+{% endblock %}

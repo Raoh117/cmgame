@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+   {% block title %} {{joc.nom}} {% endblock %}
+
+{% block extra-head %} 
+    {% load static %}
+      <script src="{% static "js/vinilInfo.js" %}"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+      
+      <script src="script.js"></script>
+      <link rel="stylesheet" href="{% static "css/style.css" %}">
+      <link rel="stylesheet" href="{% static "css/usuari_info.css" %}">
+{% endblock %}
+{% block content %}
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Centro Mail</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
+            {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            <li class="margentop">
+            <!--<div class=" input-group input-header">--> 
+            <!--formulari - METHOD:GET --> 
+                <form action="{% url "jocs:search" %}" method="get" > 
+                    <div class=" input-group-btn">
+                        <span class=".glyphicon .glyphicon-search"></span>
+                        <input type="text" id="input-titol" name="q" class="form-control" placeholder="Que busques?" aria-label="...">
+                    </div>
+                </form>
+            <!--Missatge errors -->                 
+                 {% if field.errors %}		        	
+        	     <div class="alert alert-danger">
+        	        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        	        <ul>
+        	          {% for error in field.errors%}
+        	              <li>{{ error }}</li>
+        		      {% endfor %}
+                    </ul>
+             	</div>
+            {% endif %}
+            <!--</div>--> 
+            </li>
+         </ul>
+        <!--comprovem autenticació usuari-->
+           {% if user.is_authenticated %}
+            <!--<div id="user">-->
+                <ul class="nav navbar-nav navbar-right">
+                      <!--<div class="btn-group">-->
+                        <li class="btn">
+                            <p><span class="glyphicon glyphicon-piggy-bank"></span> {{user.usuari.monedes}}</p>
+                        </li>
+                        <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
+                          <li class="divider"></li>
+                          <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
+                        </ul>
+                      <!--</div>-->
+                </ul>
+          <!--</div>-->
+            {% else %}
+            <div id="user">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url "usuaris:login" %}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                </ul>
+            </div>
+            {% endif %}
+         </div><!--/.nav-collapse -->
+        </div> 
+     </nav>
+
+<!--INFORMACIÓ DEL joc -->
+<div class="" role="main">
+    
+    <div id="ensenyarjoc">
+     <div class="desc row">
+        
+          <div class="user col col-md-3">
+            </div>
+      </div>
+     </div>
+     
+     <div class="row">
+         <div class="col-md-8">
+              
+               <ul class="list-group">
+                <li class="list-group-item"><center><h1><u> {{ joc.nom }} </u></h1></center></li>
+                <li class="list-group-item"><div class="row"><div class="pull-left meitatG"><div id="imatge"><img src="{% if joc.imatge %}{{ joc.imatge.url }}{% endif%}" class="dsk-img" ></div></div><div class="pull-left meitatG espai"><h5> Detalls: {{ joc.descripcio}} </h5></div></div></li>
+                <li class="list-group-item"><div class="row"><div class="pull-left meitatG espai"><h5> Preu G: {{ joc.preuG }} </h5></div><div><div class="pull-right meitatP" id="preu1"><h5>Preu €: {{ joc.preuE }} € </h5></div></div></div></li>
+                <li class="list-group-item"><div><div class="meitatP row"><button type="button" class="btn btn-success boto-cntc"> JUGAR </button></a></div><div class="meitatG row"></div></div></li>  
+                </ul>
+             
+         </div>
+         <div class="col-md-4">
+             <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                  </ol>
+                
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="../../../dist/images/DOOM.png" alt="Los Angeles">
+                    </div>
+                    <div class="item">
+                      <img src="../../../dist/images/BOTW.jpg" alt="Chicago">
+                    </div>
+                    <div class="item">
+                      <img src="../../../dist/images/nier_auomata.jpg" alt="New York">
+                    </div>
+                  </div> 
+                  <!-- Left and right controls -->
+                   <div class="carousel-inner">
+                    <d<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+            </div>
+             <a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success boto-cntc">Comprar</button></a>
+            {% if user.usuari.admin %}<a href="{% url "jocs:editar_joc" joc.pk %}"><button type="button" class="btn btn-warning boto-cntc">Modificar</button></a>{% endif %}
+            {% if user.usuari.admin %}<a href="{% url "jocs:eliminar_joc" joc.pk %}"><button type="button" class="btn btn-danger boto-cntc">Esborrar</button></a>{% endif %}
+          
+         </div>
+     </div>
+      
+</div>
+
+
+{% endblock %}

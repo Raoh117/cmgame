@@ -75,9 +75,9 @@ def crear_article(request):
     return render (request, 'articles/crear_article.html', {'form': form} )   """
     
     
-    
+   
 def editar_joc(request, id_joc):
-    EditForm = modelform_factory(Joc, fields=('nom','preu','imatge','descripcio'))
+    EditForm = modelform_factory(Joc, fields=('nom','preuE','preuG','imatge','descripcio'))
     unEdit = Joc()
     
     #comprovem que existeix l'oferta_disc
@@ -98,11 +98,12 @@ def editar_joc(request, id_joc):
  
     form.fields['nom'].widget.attrs['placeholder']="Nom"
     form.fields['descripcio'].widget.attrs['placeholder']="Descripcio"
-    form.fields['preu'].widget.attrs['placeholder']="Preu"
+    form.fields['preuE'].widget.attrs['placeholder']="PreuE"
+    form.fields['preuG'].widget.attrs['placeholder']="PreuG"
     
     return render (request, 'jocs/editar_joc.html', {'form': form} )    
     
-    
+   
 def eliminar_joc(request,id_joc=None):
     
     if request.method == 'POST':
@@ -114,13 +115,13 @@ def eliminar_joc(request,id_joc=None):
         return render(request, 'jocs/eliminar_joc.html', {'Joc': Joc.objects.get(pk=id_jocs)})
                   
 from django.db.models import Q             
+      
                                
 def search(request):
     query = request.GET.get('q', '')
     if query:
         qset = (
-            Q(nom__icontains=query) |
-            Q(consola__icontains=query) 
+            Q(nom__icontains=query)
         )
         results = Joc.objects.filter(qset).distinct()
     else:
@@ -129,7 +130,7 @@ def search(request):
                                 { "llista_jocs": results,
                                    "query": query }
                                )
-                               
+                              
                                
 from django.core.urlresolvers import reverse
 from django.http import *

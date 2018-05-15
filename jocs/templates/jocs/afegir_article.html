@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+  {% block title %} Afegir Joc {% endblock %}
+
+{% block extra-head %}
+{% load static %}
+<script src="{% static "js/afegir_disc.js" %}"></script>
+<link href="{% static "css/afegir-disc.css" %}" rel="stylesheet">
+<link href="{% static "css/SignUp.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
+<link href="{% static "css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Joc</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#"> Inici </a></li>
+            <li><a href="#"> Recomanats </a></li>
+            <li><a href="#"> Últims </a></li>
+            <li><a href="#"> Contacte </a></li>
+            
+          </ul>
+         
+
+        {% if user.is_authenticated %}
+            <div id="user">
+                  <ul class="nav navbar-nav"> 
+                        <li class="active"><a href="{% url "usuaris:menu_usuari"%}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</a></li></ul>
+                    <ul class="nav navbar-nav"> 
+                       <li><a href="{% url "usuaris:logout" %}"><span title="Logout" class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+                  </ul>     
+            </div>
+        </div>
+        {% else %}
+            <div id="user">
+              <ul class="nav navbar-nav">
+                <li><a href="{% url "usuaris:login" %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+              </ul>
+            </div>
+        {% endif %}
+     
+     </div><!--/.nav-collapse -->
+    </nav>
+    
+    <!--contingut usuari-amos al meollo!!!-->
+     
+        <div class="contingut-usr">
+    
+          <div class="row usr-menu">
+           
+            <div class="col-xs-3">
+              <div class="panel panel-default menu-usr">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Menú</div>
+                <!-- List group -->
+                  <div class="list-group">
+                    <a href="{% url "usuaris:menu_usuari" %}" class="list-group-item"><span class="glyphicon glyphicon-user"></span> Menú</a>
+                    <a href='{% url "usuaris:modificar_perfil" %}' class="list-group-item"><span class="glyphicon glyphicon-cog"></span> Modificar Dades</a>
+                    <a href='{% url "discos:discos_venuts" %}' class="list-group-item"><span class="glyphicon glyphicon-cd"></span> Discos Venuts</a>
+                  </div>
+                  
+              </div>
+            </div>
+          </div>
+              
+              <div class="row add disc">
+                <div class="contingut-disc">
+                    <div id="titol-puja"><h3>Pujar Disc</h3></div>
+
+                    <div id="img-dsk"></div>
+
+
+                        <form id="puja-disc" method ="post" action="" enctype = "multipart/form-data">
+                         {% csrf_token %}
+                         {% for field in form.visible_fields %}
+                      	    <div class="form-group">
+                               {{ field.label_tag }}                      	             
+                               {{ field }}
+                            </div>
+                                
+                        <!--Missatge errors -->                 
+                            {% if field.errors %}		        	
+                			        <div class="alert alert-danger">
+                			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                				        <ul>
+                				          {% for error in field.errors%}
+                				              <li>{{ error }}</li>
+                			              {% endfor %}
+                			            </ul>
+                		         	</div>
+                		        {% endif %}
+                        {% endfor %}  
+
+                     
+                     
+                     
+                        <div id="pujar">
+                           
+                            <div class="checkbox">
+                              <label><input type="checkbox" value="">Estic disposat a negociar</label>
+                            </div>
+                            <div class="checkbox">
+                              <label><input type="checkbox" value="">Estic disposat a fer enviaments</label>
+                            </div>
+                            <div class="checkbox">
+                              <label><input type="checkbox" value="">Estic disposat a intercanviar vinils</label>
+                            </div>
+                            
+                            <div id="botons-disc">
+                              <button type="submit" class="btn btn-success envia">Enviar</button>
+                           </div>
+                        </div>
+                      </form>
+                    </div>  
+                  </div>
+
+{% endblock %}

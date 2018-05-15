@@ -1,0 +1,75 @@
+body{
+    background-image:url("../images/metroid-wallpaper.jpg");
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:auto;
+}
+
+.infor{
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+}
+
+input{
+    color:black;
+}
+
+.formulari{
+    margin:10px;
+    padding:15px;
+    width:100%;
+    margin:auto;
+}
+
+h1{
+    text-align: center
+}
+
+#content-login{
+   background:rgba(0,0,0,0.5);
+   padding:20px;
+   color:white;
+   border-radius: 5px;
+}
+
+#logo{
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:cover;
+    
+    width:300px;
+    height:300px;
+}
+
+.check{
+    margin-top:-10px;
+    margin-bottom:-10px;
+}
+
+#id_email{
+    opacity:0.8;
+}
+
+#id_password{
+    opacity:0.8;
+}
+
+#id_password:focus{
+    opacity:1;
+}
+
+#id_email:focus{
+    opacity:1;
+}
+
+@media only screen and (min-width:900px){
+        /* styles for browsers larger than 900px; */
+       #content-login{
+            width:45%;
+        }
+         
+}

@@ -1,0 +1,7 @@
+#contingut-reco{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 104%;
+    margin: auto;
+}

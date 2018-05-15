@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+  {% block title %} Esborrar disc {% endblock %}
+
+{% block extra-head %}
+{% load static %}
+<script src="{% static "js/afegir_disc.js" %}"></script>
+<link href="{% static "css/eliminar_disc.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
+<link href="{% static "css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block content %}
+
+
+                  
+                  <div id="alerta"></div>
+
+                  
+                  <div class="row add disc">
+                    <div class="panel panel-default contingut-disc">
+                        <form id="puja-disc" method ="post" action="">
+                             {% csrf_token %}
+                          	<div class="panel-heading"><h4>Segur que vols esborrar el disc <strong>{{ joc.nom }}</strong> ?</h4>
+                          	  Un cop eliminat el disc no es podrà recuperar
+                          	</div>
+                          	<div class="panel-body"><button type="submit" id="si" class="btn btn-success"> Confirmar </button>
+                           <a class="btn btn btn-danger"
+                               href="{% url 'usuaris:menu_usuari' %}">Cancelar</a>    </div>
+
+                        </form>
+                    </div>
+                </div> 
+                
+                
+             
+   
+{% endblock %}

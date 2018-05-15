@@ -10,6 +10,7 @@ class Usuari (models.Model):
     #continguts extras que volem
     admin=models.BooleanField(default=False)
     direccio=models.CharField(max_length=200,)
+    monedes = models.IntegerField(default = 100)
     # 1 to 1 - model User
     usuari = models.OneToOneField( User )
     image = models.ImageField(upload_to='usuaris',
