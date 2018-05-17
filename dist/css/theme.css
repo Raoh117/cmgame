@@ -1,7 +1,7 @@
 body {
   padding-top: 70px;
   padding-bottom: 30px;
-  background-color: black;
+  background-color: #2c3d41;
 }
 
 .theme-dropdown .dropdown-menu {
@@ -18,7 +18,7 @@ body {
 }
 
 .margentop{
-  margin-top: 2%;
+  margin-top: 3%;
 }
 .camp{
   color: white;
@@ -67,7 +67,6 @@ h4{
    width: 100%;
 }
 #input-titol{
-
   border-radius: 200px 200px 200px 200px;
 }
 
@@ -88,6 +87,10 @@ h4{
   border-top-right-radius: 4px;
   -webkit-filter: brightness(70%);
   filter: brightness(70%);
+}
+
+.meitatGG{
+  width: 50%;
 }
 
 .meitatG{
@@ -193,7 +196,13 @@ h4{
    -webkit-border-radius: 200px 200px 200px 200px;
    border: 0px solid #000000;
 }
+.G{
+  background:#b544d6;
+}
 
+.P{
+  background:#ffa833;
+}
 .row{
   background-color: white;
 }
@@ -242,15 +251,31 @@ h4{
   padding:10px;
 }
 
+.fons{
+  background-color: #9c9090;   /*a99595*/
+}
+
+.peopleCarouselImg img {
+  width: auto;
+  height: 225px;
+  max-height: 225px;
+}
+
+.peopleCarousel {
+  width: auto;
+  height: 50%;
+  max-height: 50%;
+}
+
 .titol{
    position: absolute;
-   top: 0px;
+   bottom: 0px;
    text-align: center;
    background: white; /* For browsers that do not support gradients */
-   background: -webkit-linear-gradient(white, black);
-   background: -o-linear-gradient(white, black);
-   background: -moz-linear-gradient(white, black);
-   background: linear-gradient(white, black);
+   background: -webkit-linear-gradient(#3cab18, #2f7c15);
+   background: -o-linear-gradient(#3cab18, #2f7c15);
+   background: -moz-linear-gradient(#3cab18, #2f7c15);
+   background: linear-gradient(#3cab18, #2f7c15);
    width: 100%;
    opacity:0.8;
 }
@@ -458,6 +483,15 @@ h4{
   color:#ED705F;
   cursor: pointer;
 }
+
+.estrella{
+  position: absolute;
+  right:-5px;
+  top:-5px;
+  color:#F7FE2E;
+  transform: scale(2.5);
+}
+
 
 .item-usr{
   position: relative;

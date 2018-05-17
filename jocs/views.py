@@ -3,6 +3,7 @@ from jocs.models import Joc
 from .forms import JocForm
 from django.forms import modelform_factory
 from django.contrib import messages
+from django.conf import settings
 # Create your views here.
 
 
@@ -11,28 +12,15 @@ def index(request):
     jocs= Joc.objects.all();
     ctx={'llista_jocs': jocs}
     return render(request, "jocs/index.html",ctx)
-"""
-def consoles(request):
-    articles= Article.objects.filter(esconsola=True);
-    ctx={'llista_articles': articles}
-    return render(request, "articles/productes.html",ctx)
-    
-def accesoris(request):
-    articles= Article.objects.filter(esaccesori=True);
-    ctx={'llista_articles': articles}
-    return render(request, "articles/productes.html",ctx)
-    
-def videojocs(request):
-    articles= Article.objects.filter(esaccesori=False,esconsola=False);
-    ctx={'llista_articles': articles}
-    return render(request, "articles/productes.html",ctx)
-"""    
+
 def joc(request,id_joc):
     joc = get_object_or_404(Joc,pk=id_joc)
     ctx={'joc': joc}
     return render(request,"jocs/joc.html",ctx)
     
-
+def jugar(request,id_joc):
+    url = settings.STATIC_URL + "Games/%s/index.html" % id_joc
+    return HttpResponseRedirect(url)
 """
 def crear_article(request):
     if request.method == 'POST':

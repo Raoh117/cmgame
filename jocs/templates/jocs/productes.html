@@ -73,7 +73,8 @@
                         </li>
                         <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:menu_usuari" %}">Carritu <span class="glyphicon glyphicon-shopping-cart"></li>
+                          <li><a href="{% url "usuaris:biblioteca" %}">Biblioteca</a></li>
                           <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
                           <li class="divider"></li>
                           <li><a href="{% url "usuaris:logout" %}">Logout</a></li>

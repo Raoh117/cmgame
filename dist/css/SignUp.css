@@ -18,7 +18,16 @@
     align-items:center;
     margin:auto;
     background:rgba(255,255,255,0.9);
-    
+}
+
+.inforr{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    background:rgba(255,255,255,0.9);
 }
 
 #cont-log{

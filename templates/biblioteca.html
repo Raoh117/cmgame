@@ -10,7 +10,7 @@
 {% block content  %}
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -59,7 +59,8 @@
                         </li>
                         <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:menu_usuari" %}">Carritu <span class="glyphicon glyphicon-shopping-cart"></li>
+                          <li><a href="{% url "usuaris:biblioteca" %}">Biblioteca</a></li>
                           <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
                           <li class="divider"></li>
                           <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
@@ -77,51 +78,21 @@
          </div><!--/.nav-collapse -->
         </div> 
      </nav>
-    <div class="contingut-usr">
-      <div class="container-fluid">
-      </div>
-              {% for comprat in biblio %}
+    <div id="contingut">
+        <center><h3>Biblioteca</h3></center>
+        <div class="page-header items">
+          <!--cercador -->
+        
+        {% for comprat in biblio %}
                  <div class="item" data-usuari="nose"> 
-                      <a href="{% url "jocs:joc" comprat.joc.pk %}"><img src="{%if comprat.joc.imatge %}{{comprat.joc.imatge.url}}{% endif%}"  class="img-responsive hq" ></a>
-                      <div class="preu" id="preu1">{{ comprat.joc.preuE }} € </div>
-                      <div class="preug" id="preu1">{{ comprat.joc.preuG }} G </div>
-                  <!-- <div class="titol" id="titol1"><h4> {{ joc.nom }} </h4></div> -->
+                      <a href="{% url "jocs:jugar" comprat.joc.pk %}"><img src="{%if comprat.joc.imatge %}{{comprat.joc.imatge.url}}{% endif%}"  class="img-responsive hq" ></a>
+                      {% if comprat.completat %}<div class="estrella"><small><span class="glyphicon glyphicon-star" title="Completat" ></span></small></div>{% endif %}
+                      <!--<div class="titol" id="titol1"><h4> Jugar! </h4></div> -->
                 </div>
-              {% endfor %} 
-
-            
-            <!-- Modal borrar-->
-            <div id="myModalB" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Esteu segurs que vols esborrar aquest disc?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                              <p>Si esborreu aquest disc desapereixarà del vostre cataleg, i no podrà ser comprat</p>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">No, no esborris</button>
-                            <button type="button" class="pesao btn btn-success">Sí, esborra el disc</button>
-                        </div>
-                        <div class="modal-footer amagat">
-                            <p>Si us plau,ens seria molt útil saber perque esborres aquest disc. Si l'has venut, la venta pot millorar la teva imatge davant les properes transaccions</p>
-                            <form action="#">
-                              <input type="radio" name="estat" value="venut" checked="checked"> He venut aquest disc<br>
-                              <input type="radio" name="estat" value="borrat"> Ja no el vull vendre<br>
-                              <button class="OK" type="button" data-dismiss="modal" >OK</button>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            </div>
+                
+              {% endfor %}
+          </div>
+         </div>
     </div>
 
 {% endblock %}

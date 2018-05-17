@@ -62,7 +62,8 @@
                         </li>
                         <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:menu_usuari" %}">Carritu <span class="glyphicon glyphicon-shopping-cart"></li>
+                          <li><a href="{% url "usuaris:biblioteca" %}">Biblioteca</a></li>
                           <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
                           <li class="divider"></li>
                           <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
@@ -83,25 +84,13 @@
 
 <!--INFORMACIÓ DEL joc -->
 <div class="" role="main">
-    
-    <div id="ensenyarjoc">
-     <div class="desc row">
-        
-          <div class="user col col-md-3">
-            </div>
-      </div>
-     </div>
      
-     <div class="row">
+     <div class="row fons">
          <div class="col-md-8">
-              
-               <ul class="list-group">
-                <li class="list-group-item"><center><h1><u> {{ joc.nom }} </u></h1></center></li>
-                <li class="list-group-item"><div class="row"><div class="pull-left meitatG"><div id="imatge"><img src="{% if joc.imatge %}{{ joc.imatge.url }}{% endif%}" class="dsk-img" ></div></div><div class="pull-left meitatG espai"><h5> Detalls: {{ joc.descripcio}} </h5></div></div></li>
-                <li class="list-group-item"><div class="row"><div class="pull-left meitatG espai"><h5> Preu G: {{ joc.preuG }} </h5></div><div><div class="pull-right meitatP" id="preu1"><h5>Preu €: {{ joc.preuE }} € </h5></div></div></div></li>
-                <li class="list-group-item"><div><div class="meitatP row"><button type="button" class="btn btn-success boto-cntc"> JUGAR </button></a></div><div class="meitatG row"></div></div></li>  
-                </ul>
-             
+                <center><h1 style="color:black;"><u> {{ joc.nom }} </u></h1></center></li>
+                <div class="row"><div class="pull-left meitatP"><div id="imatge"><img src="{% if joc.imatge %}{{ joc.imatge.url }}{% endif%}" class="dsk-img" ></div></div><div class="pull-left meitatGG espai"><h5> Detalls: {{ joc.descripcio}} </h5></div></div>
+                <div class="row fons"><div class="pull-left meitatG G espai"><center><h5> Preu G: {{ joc.preuG }} G</h5></center></div><div><div class="pull-right meitatG P" id="preu1"><center><h5>Preu €: {{ joc.preuE }} € </h5></center></div></div></div>
+                <!--<div><div class="meitatP row"><button type="button" class="btn btn-success boto-cntc"> JUGAR </button></a></div><div class="meitatG row"></div></div>-->
          </div>
          <div class="col-md-4">
              <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -114,14 +103,14 @@
                 
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="../../../dist/images/DOOM.png" alt="Los Angeles">
+                    <div class="item active peopleCarouselImg">
+                        <img src="../../../dist/images/Imatge.png">
                     </div>
-                    <div class="item">
-                      <img src="../../../dist/images/BOTW.jpg" alt="Chicago">
+                    <div class="item peopleCarouselImg">
+                      <img src="../../../dist/images/TryAndReplay1.png">
                     </div>
-                    <div class="item">
-                      <img src="../../../dist/images/nier_auomata.jpg" alt="New York">
+                    <div class="item peopleCarouselImg">
+                      <img src="../../../dist/images/Imatge.png">
                     </div>
                   </div> 
                   <!-- Left and right controls -->
@@ -136,10 +125,11 @@
                   </a>
                 </div>
             </div>
-             <a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success boto-cntc">Comprar</button></a>
+            {% if user.usuari.admin != None %}<center><a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success boto-cntc">Comprar</button></a></center>{% endif %}
+            {% if user.usuari.admin %}<a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success boto-cntc">Comprar</button></a>{% endif %}
             {% if user.usuari.admin %}<a href="{% url "jocs:editar_joc" joc.pk %}"><button type="button" class="btn btn-warning boto-cntc">Modificar</button></a>{% endif %}
             {% if user.usuari.admin %}<a href="{% url "jocs:eliminar_joc" joc.pk %}"><button type="button" class="btn btn-danger boto-cntc">Esborrar</button></a>{% endif %}
-          
+            <div></div>
          </div>
      </div>
       

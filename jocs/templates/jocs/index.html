@@ -73,8 +73,8 @@
                         </li>
                         <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
                         <ul class="dropdown-menu" role="menu">
+                          <li><a href="{% url "usuaris:menu_usuari" %}">Carritu <span class="glyphicon glyphicon-shopping-cart"></li>
                           <li><a href="{% url "usuaris:biblioteca" %}">Biblioteca</a></li>
-                          <li><a href="{% url "usuaris:menu_usuari" %}">Carro</a></li>
                           <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
                           <li class="divider"></li>
                           <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
@@ -97,7 +97,8 @@
     </div>
     <div class="container theme-showcase" role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <center><h3>NOVETATS</h3></center>
+      <center><h3 style="color:white;">NOVETATS</h3></center>
+         
          <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
           <ol class="carousel-indicators">
@@ -108,13 +109,13 @@
         
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
-            <div class="item active">
+            <div class="item active peopleCarousel">
               <a href="{% url "jocs:joc" 10%}" ><img src="../../../dist/images/DOOM.png" alt="Los Angeles"></a>
             </div>
-            <div class="item">
+            <div class="item peopleCarousel">
               <a href="{% url "jocs:joc" 9%}" ><img src="../../../dist/images/BOTW.jpg" alt="Chicago"></a>
             </div>
-            <div class="item">
+            <div class="item peopleCarousel">
               <img src="../../../dist/images/nier_auomata.jpg" alt="New York">
             </div>
           </div> 
@@ -137,7 +138,6 @@
         {% for joc in llista_jocs %}
          <div class="item" data-usuari="nose"> 
              <a href="{% url "jocs:joc" joc.pk %}"><img src="{%if joc.imatge %}{{joc.imatge.url}}{% endif%}"  class="img-responsive hq" ></a>
-               
               <div class="preu" id="preu1">{{ joc.preuE }} € </div>
               <div class="preug" id="preu1">{{ joc.preuG }} G </div>
               <!-- <div class="titol" id="titol1"><h4> {{ joc.nom }} </h4></div> -->
@@ -150,8 +150,7 @@
     
      <!-- Footer -->
     <nav class="navbar navbar-inverse footer">
-      <div id="concurs">
-      </div>
+
      <div id="adalt">
          <span class="glyphicon glyphicon-menu-up" title="amunt" aria-hidden="true"></span>
      </div>

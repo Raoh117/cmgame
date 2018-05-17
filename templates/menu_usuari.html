@@ -10,7 +10,7 @@
 {% block content  %}
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -59,7 +59,8 @@
                         </li>
                         <div type="button" class="btn dropdown-toggle"data-toggle="dropdown"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</p> </div>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="{% url "usuaris:menu_usuari" %}">El teu menu</a></li>
+                          <li><a href="{% url "usuaris:menu_usuari" %}">Carritu <span class="glyphicon glyphicon-shopping-cart"></li>
+                          <li><a href="{% url "usuaris:biblioteca" %}">Biblioteca</a></li>
                           <li><a href="{% url "usuaris:modificar_perfil" %}">Modificar perfil</a></li>
                           <li class="divider"></li>
                           <li><a href="{% url "usuaris:logout" %}">Logout</a></li>
@@ -85,7 +86,7 @@
                  <div class="container-fluid">
                     <div class="row now"> <!-- Give this div your desired background color -->
                         <div class="container padleft">
-                          <div class="row now">
+                          <div class="row fons">
                               <div class="col-md-12 laimatge">
                                 <center><a href="{% url "jocs:joc" jocs.joc.pk %}"><img src="{% if jocs.joc.imatge %}{{ jocs.joc.imatge.url }}{% endif%}" class="img-responsive" ></a></center> <!--anava aqui un hr -->
                               </div>

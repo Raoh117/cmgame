@@ -23,5 +23,9 @@ $(document).ready(function(){
 		$('.right').hide();
 		//ho amago
 	}
+	
+	$(document).on('click','.navbar-collapse.in',function(e) {
+	        $(this).collapse('hide');
+	});
 })
 

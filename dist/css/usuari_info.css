@@ -33,7 +33,7 @@
     }
     
     .boto-cntc{
-        margin-left:100px;
+        /*margin-left:100px;*/
         width:250px;
     }
 
@@ -67,7 +67,6 @@
         }
         
         .boto-cntc{
-            
             width:100px;
         }
         

@@ -1,0 +1,36 @@
+canvas{
+    margin:auto;
+    border-radius:4px;
+    margin-bottom: 20px;
+}
+
+body{
+    background:#202020 !important;
+}
+
+#controls{
+    color:white;
+    margin:auto;
+}
+
+#try{
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+    margin-top:10px;
+}
+
+#rep{
+    width:250px;
+    margin:auto;
+}
+
+#controls{
+    width:300px;
+    position: fixed;
+    left: 0;
+    margin-left:10px;
+    margin-top:10%;
+}
