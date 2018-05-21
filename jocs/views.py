@@ -21,46 +21,34 @@ def joc(request,id_joc):
 def jugar(request,id_joc):
     url = settings.STATIC_URL + "Games/%s/index.html" % id_joc
     return HttpResponseRedirect(url)
-"""
-def crear_article(request):
+
+def crear_joc(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST,request.FILES)
+        form = JocForm(request.POST,request.FILES)
         
         if form.is_valid():
            nom= form.cleaned_data['nom']
-           consola = form.cleaned_data['consola']
-           esconsola = form.cleaned_data['esconsola']
-           PEGI=form.cleaned_data['PEGI']
-           stock=form.cleaned_data['stock']
-           companyia=form.cleaned_data['companyia']
-           preu=form.cleaned_data['preu']
-           coleccionista=form.cleaned_data['coleccionista']
-           detalls=form.cleaned_data['detalls']
+           preuE=form.cleaned_data['preuE']
+           preuG=form.cleaned_data['preuG']
+           descripcio=form.cleaned_data['descripcio']
            imatge=form.cleaned_data['imatge']
-           video=form.cleaned_data['video']
-           esaccesori = form.cleaned_data['esaccesori']
-           #creem l'objecte OFERTA_DISC amb les dades rebudes
-           Article.objects.create( nom=nom,
-                                        consola=consola,
-                                        esconsola=esconsola,
-                                        PEGI=PEGI,
-                                        stock=stock,
-                                        companyia=companyia,
-                                        preu=preu,
-                                        coleccionista=coleccionista,
-                                        detalls=detalls,
-                                        imatge=imatge,
-                                        video=video,
-                                        esaccesori=esaccesori,)   
+           #creem l'objecte Joc amb les dades rebudes
+           Joc.objects.create( nom=nom,
+                                        preuE=preuE,
+                                        preuG=preuG,
+                                        descripcio=descripcio,
+                                        imatge=imatge,)   
            messages.info(request,"joc pujat correctament")
            return redirect("usuaris:menu_usuari")    
     else:
-        form= ArticleForm()
+        nova_id=Joc.objects.latest('id'); #Haig de sumar un, o baixar el contador general
+        nova_id.id += 1
+        form= JocForm()
         
     for f in form.fields:
         form.fields[f].widget.attrs['class'] = 'formulari'
         
-    return render (request, 'articles/crear_article.html', {'form': form} )   """
+    return render (request, 'jocs/crear_joc.html', {'form': form, "nova_id":nova_id} )   
     
     
    

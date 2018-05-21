@@ -10,7 +10,7 @@
 {% block content  %}
 
     <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -26,6 +26,7 @@
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
             {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
             <!--formulari - METHOD:GET --> 
@@ -79,7 +80,7 @@
         </div> 
      </nav>
     <div id="contingut">
-        <center><h3>Biblioteca</h3></center>
+        <center><h3 style="color:white;">Biblioteca</h3></center>
         <div class="page-header items">
           <!--cercador -->
         

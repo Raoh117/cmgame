@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-  {% block title %} Afegir disc {% endblock %}
+  {% block title %} Afegir joc {% endblock %}
 
 {% block extra-head %}
 {% load static %}
@@ -88,24 +88,10 @@
      
         <div class="contingut-usr">
     
-          <div class="row usr-menu">
-           
-            <div class="col-xs-3">
-              <div class="panel panel-default menu-usr">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Menú</div>
-                <!-- List group -->
-                  <div class="list-group">
-                    <a href="{% url "usuaris:menu_usuari" %}" class="list-group-item"><span class="glyphicon glyphicon-user"></span> Menú</a>
-                  </div>
-                  
-              </div>
-            </div>
-          </div>
               
               <div class="row add disc">
                 <div class="contingut-disc">
-                    <div id="titol-puja"><h3>Pujar Joc</h3></div>
+                    <div id="titol-puja"><h3>Pujar Joc Nº  {{nova_id.id}}</h3></div>
 
                     <div id="img-dsk"></div>
 

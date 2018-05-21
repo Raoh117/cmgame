@@ -12,14 +12,14 @@
 {% block extra-head %}
     {% load static %}  
     <script src="{% static "js/index.js" %}"></script>
-    <script src="../../../dist/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="{% static "assets/js/ie-emulation-modes-warning.js" %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
-    <script src="../../../dist/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{% static "assets/js/ie10-viewport-bug-workaround.js" %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="../../../dist/css/index.css" rel="stylesheet">
+    <link href="{% static "css/index.css " %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -40,6 +40,7 @@
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
             {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
             <!--formulari - METHOD:GET --> 
@@ -110,13 +111,13 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active peopleCarousel">
-              <a href="{% url "jocs:joc" 10%}" ><img src="../../../dist/images/DOOM.png" alt="Los Angeles"></a>
+              <a href="{% url "jocs:joc" 10%}" ><img src="{% static "images/DOOM.png" %}" alt="Los Angeles"></a>
             </div>
             <div class="item peopleCarousel">
-              <a href="{% url "jocs:joc" 9%}" ><img src="../../../dist/images/BOTW.jpg" alt="Chicago"></a>
+              <a href="{% url "jocs:joc" 9%}" ><img src="{% static "images/BOTW.jpg" %}" alt="Chicago"></a>
             </div>
             <div class="item peopleCarousel">
-              <img src="../../../dist/images/nier_auomata.jpg" alt="New York">
+              <img src="{% static "images/nier_auomata.jpg" %}" alt="New York">
             </div>
           </div> 
           <!-- Left and right controls -->
@@ -211,9 +212,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../dist/assets/js/docs.min.js"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "assets/js/docs.min.js" %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../dist/assets/js/ie10-viewport-bug-workaround.js"></script>
-
+    <script src="{% static "assets/js/ie10-viewport-bug-workaround.js" %}"></script>
  {% endblock %}
