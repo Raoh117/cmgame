@@ -18,7 +18,7 @@ body {
 }
 
 .margentop{
-  margin-top: 3%;
+  margin-top: 3%
 }
 .camp{
   color: white;
@@ -89,13 +89,25 @@ h4{
   filter: brightness(70%);
 }
 
-.meitatGG{
-  width: 50%;
-}
+
 
 .meitatG{
-  width: 40%;
+  width: 80%;
+  padding:4px;
+  border-radius:5px;
+  margin: auto;
 }
+.sep{
+  margin-top:15px;
+}
+
+.titol{
+  text-align: center;
+  margin:auto;
+}
+
+
+
 .meitatP{
   width: 30%;
 }
@@ -452,6 +464,8 @@ h4{
   flex-wrap: wrap;
 }
 
+
+
 .espai{
   padding-left: 1%;
 }
@@ -629,6 +643,12 @@ p{
 .rm:hover{
   color:#CC0000;
 }
+
+.btnComprar{
+  width:100%;
+}
+
+
 @media only screen and (min-width:900px){
         /* styles for browsers larger than 960px; */
        .disc-usr{
@@ -637,6 +657,26 @@ p{
           flex-wrap:wrap;
           width:1000px;
         } 
+        
+        .content{
+          padding: 20px;
+          border-radius: 5px;
+          width: 75%;
+          margin: auto !important;
+        }
+        
+        .imatge-info{
+            width:200px;
+            margin:auto;
+            border-radius:5px;
+            align-content:center;
+          }
+          
+          .text-top{
+              margin-top: 30px;
+            }
+  
+        
     
   
 }
@@ -650,6 +690,20 @@ p{
           
          
         } 
+        
+          .imatge-info{
+            width:200px;
+            margin:auto;
+            border-radius:5px;
+            align-content:center;
+            margin-left: 20px;
+          }
+          
+          .text-top{
+              margin-top: 20px;
+            }
+        
+        
     }
 
 @media only screen and (max-device-width:480px){
@@ -664,8 +718,32 @@ p{
         } 
         
         .laimatge{
-            width: 0%;
+            width: 100%;
             margin-top: 1%;
           }
+          
+          .content{
+            width: 100%;
+            border-radius: 5px;
+            margin: auto;
+            padding:10px;
+          }
+          
+          .titol-info{
+            text-align: center;
+            margin:auto;
+          }
+          
+          .imatge-info{
+            width:200px;
+            margin:auto;
+            border-radius:5px;
+            align-content:center;
+            margin-left: 20px;
+            }
+          
+          .text-top{
+              margin-top: 30px;
+            }
   
 }

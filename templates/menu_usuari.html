@@ -84,20 +84,30 @@
       </div>
               {% for jocs in comandes %}
                  <div class="container-fluid">
-                    <div class="row now"> <!-- Give this div your desired background color -->
-                        <div class="container padleft">
-                          <div class="row fons">
-                              <div class="col-md-12 laimatge">
+                    <div class="row"> <!-- Give this div your desired background color -->
+                        <div class="container">
+                          <div class="row">
+                              <div class="col-md-6 laimatge">
                                 <center><a href="{% url "jocs:joc" jocs.joc.pk %}"><img src="{% if jocs.joc.imatge %}{{ jocs.joc.imatge.url }}{% endif%}" class="img-responsive" ></a></center> <!--anava aqui un hr -->
                               </div>
-                              <div class="col-md-12 informacio2">
-                                <div class="remove"><a class="editting" href="{% url "usuaris:eliminar_comanda" jocs.pk %}"><small><span class="glyphicon glyphicon-remove" title="Esborrar joc" ></span></small></a></div>
-                                    <ul class="list-group">
-                                      <li class="list-group-item"><div class="row"><h3><center><u> {{ jocs.joc.nom }} </u></h3></center></div></li>
-                                      <li class="list-group-item"><div class="row"><div class="pull-left meitatG"><h3>{{ jocs.joc.preuE }} € </h3></div><div><div class="pull-right meitatP" id="preu1"><h3>{{ jocs.joc.preuG }} G </h3></div></div></div></li>  
-                                      <li class="list-group-item"><div class="row"><div class="dreta">{{ jocs.joc.descripcio }}</div></div></li>
-                                    </ul>
+                              <div class="col-md-6 col-sm-6 text-top ">
+                          <div class="row ">
+                    
+                          <div class="meitatGG espai">
+                            <h5> Detalls: {{ jocs.joc.descripcio}} </h5>
+                            
+                                <div class="meitatG G espai">
+                                    <center><h5> Preu G: {{ jocs.joc.preuG }} G</h5></center>
                                 </div>
+                                <div>
+                                    <div class="meitatG sep P" id="preu1">
+                                        <center><h5>Preu €: {{ jocs.joc.preuE }} € </h5></center>
+                                    </div>
+                                </div>
+                          </div>
+                        </div> 
+                        </div>
+                        <!--<div class="remove"><a class="editting" href="{% url "usuaris:eliminar_comanda" jocs.joc.pk %}"><small><span class="glyphicon glyphicon-remove" title="Esborrar joc" ></span></small></a></div>-->
                             </div>
                         </div>
                     </div>

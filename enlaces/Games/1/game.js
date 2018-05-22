@@ -12,7 +12,7 @@ var seguent=false;
 var index = 0;
 var line = '';
 var puntuacio=0;
-
+var id="1";
 
 //Disseny dels nivells: x: wall, o: coin, !: lava, p: plataforma, w: move-wall
 var levels = [
@@ -420,10 +420,21 @@ var mainState = {
             
             
         }
+        
+        
   
 };
 
-
+$(document).ready(function(){
+    $("button").click(function(){
+        alert("A");
+        $.get("/Usuari/proba/1",
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+            
 var game = new Phaser.Game(1250, 600), behaviorPlugin;
 game.state.add('main', mainState);
 game.state.start('main');

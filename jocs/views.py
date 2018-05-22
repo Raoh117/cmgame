@@ -18,10 +18,7 @@ def joc(request,id_joc):
     ctx={'joc': joc}
     return render(request,"jocs/joc.html",ctx)
     
-def jugar(request,id_joc):
-    url = settings.STATIC_URL + "Games/%s/index.html" % id_joc
-    return HttpResponseRedirect(url)
-
+        
 def crear_joc(request):
     if request.method == 'POST':
         form = JocForm(request.POST,request.FILES)
@@ -106,7 +103,6 @@ def search(request):
                                 { "llista_jocs": results,
                                    "query": query }
                                )
-                              
                                
 from django.core.urlresolvers import reverse
 from django.http import *

@@ -86,7 +86,7 @@
         
         {% for comprat in biblio %}
                  <div class="item" data-usuari="nose"> 
-                      <a href="{% url "jocs:jugar" comprat.joc.pk %}"><img src="{%if comprat.joc.imatge %}{{comprat.joc.imatge.url}}{% endif%}"  class="img-responsive hq" ></a>
+                      <a href="{% url "usuaris:jugar" comprat.joc.pk %}"><img src="{%if comprat.joc.imatge %}{{comprat.joc.imatge.url}}{% endif%}"  class="img-responsive hq" ></a>
                       {% if comprat.completat %}<div class="estrella"><small><span class="glyphicon glyphicon-star" title="Completat" ></span></small></div>{% endif %}
                       <!--<div class="titol" id="titol1"><h4> Jugar! </h4></div> -->
                 </div>

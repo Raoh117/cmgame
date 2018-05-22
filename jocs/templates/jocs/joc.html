@@ -85,11 +85,39 @@
 <!--INFORMACIÓ DEL joc -->
 <div class="" role="main">
      
-     <div class="row fons">
+     <div class="row content">
          <div class="col-md-8">
-                <center><h1 style="color:black;"><u> {{ joc.nom }} </u></h1></center></li>
-                <div class="row"><div class="pull-left meitatP"><div id="imatge"><img src="{% if joc.imatge %}{{ joc.imatge.url }}{% endif%}" class="dsk-img" ></div></div><div class="pull-left meitatGG espai"><h5> Detalls: {{ joc.descripcio}} </h5></div></div>
-                <div class="row fons"><div class="pull-left meitatG G espai"><center><h5> Preu G: {{ joc.preuG }} G</h5></center></div><div><div class="pull-right meitatG P" id="preu1"><center><h5>Preu €: {{ joc.preuE }} € </h5></center></div></div></div>
+             <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h1 class="titol-info" style="color:black;"><u> {{ joc.nom }} </u></h1>
+                    <div class="meitatP">
+                        <div id="imatge"><img src="{% if joc.imatge %}{{ joc.imatge.url }}{% endif%}" class="imatge-info" ></div>
+                </div>
+                </div>
+                
+                <div class="col-md-6 col-sm-6 text-top ">
+                    <div class="row ">
+                    
+                        <div class="meitatGG espai">
+                            <h5> Detalls: {{ joc.descripcio}} </h5>
+                            
+                                <div class="meitatG G espai">
+                                    <center><h5> Preu G: {{ joc.preuG }} G</h5></center>
+                                </div>
+                                <div>
+                                    <div class="meitatG sep P" id="preu1">
+                                        <center><h5>Preu €: {{ joc.preuE }} € </h5></center>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    
+                    </div> 
+                </div>
+                
+             </div>
+                
+                
                 <!--<div><div class="meitatP row"><button type="button" class="btn btn-success boto-cntc"> JUGAR </button></a></div><div class="meitatG row"></div></div>-->
          </div>
          <div class="col-md-4">
@@ -104,13 +132,13 @@
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner">
                     <div class="item active peopleCarouselImg">
-                        <img src="../../../dist/images/Imatge.png">
+                        <img src="{% static "images/Imatge.png" %}">
                     </div>
                     <div class="item peopleCarouselImg">
-                      <img src="../../../dist/images/TryAndReplay1.png">
+                      <img src="{% static "images/Imatge.png" %}">
                     </div>
                     <div class="item peopleCarouselImg">
-                      <img src="../../../dist/images/Imatge.png">
+                      <img src="{% static "images/Imatge.png" %}">
                     </div>
                   </div> 
                   <!-- Left and right controls -->
@@ -125,8 +153,8 @@
                   </a>
                 </div>
             </div>
-            {% if user.usuari.admin != None %}<center><a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success boto-cntc">Comprar</button></a></center>{% endif %}
-            {% if user.usuari.admin %}<a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success boto-cntc">Comprar</button></a>{% endif %}
+            {% if user.is_authenticated %}<center><a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success btnComprar">Comprar</button></a></center>{% endif %}
+
             {% if user.usuari.admin %}<a href="{% url "jocs:editar_joc" joc.pk %}"><button type="button" class="btn btn-warning boto-cntc">Modificar</button></a>{% endif %}
             {% if user.usuari.admin %}<a href="{% url "jocs:eliminar_joc" joc.pk %}"><button type="button" class="btn btn-danger boto-cntc">Esborrar</button></a>{% endif %}
             <div></div>

@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect, render_to_resp
 from .forms import LoginForm, nou_usuari_form
 from django.core.urlresolvers import reverse
 from django.forms import modelform_factory
+from django.http import HttpResponse
 from .models import Usuari
 from django.conf import settings
 from jocs.models import Joc, Comprat
@@ -139,15 +140,45 @@ def biblioteca(request):
     ctx={"biblio":biblio}
     return render(request,"biblioteca.html",ctx)
     
+def proba(request, id_joc):
+    usuari = Usuari.objects.get(usuari=request.user)
+    joc = Joc.objects.get(id=id_joc)
+    compra = get_object_or_404(Comprat,joc=joc,usuari = usuari)
+    if compra:
+        compra.completat = True
+        compra.save()
+        usuari.monedes +=100
+        usuari.save()
+    print(usuari.usuari)
+    print(joc.nom)
+    return HttpResponse("Enhorabona")
+
+def jugar(request,id_joc):
+    usuari = Usuari.objects.get(usuari=request.user)
+    joc = get_object_or_404(Joc,pk=id_joc)
+    compra = get_object_or_404(Comprat,joc=joc,usuari = usuari)
+    ctx = {"compra":compra}
+    if compra:
+        url = settings.STATIC_URL + "Games/%s/index.html" % id_joc
+        return HttpResponseRedirect(url)
+        #return render(request, url, ctx)
+        #return redirect(url)
+    else:
+        return redirect('usuaris:biblioteca')
     
 def afegir_al_carritu(request, id_joc):
     carritu = Carret.objects.get(usuari=request.user)
     joc_demanat=Joc.objects.get(id=id_joc)
-    nova_comanda = Comanda.objects.create(carro = carritu, joc = joc_demanat, preuE = joc_demanat.preuE, preuG = joc_demanat.preuG)
-    carritu.preu_total += joc_demanat.preuE
-    carritu.preuG_total += joc_demanat.preuG
-    carritu.save()
-    return redirect("usuaris:menu_usuari") 
+    usuari = Usuari.objects.get(usuari=request.user)
+    estacomprat = Comprat.objects.filter (usuari = usuari, joc = joc_demanat)
+    if estacomprat:
+        return redirect("usuaris:biblioteca")
+    else:
+        nova_comanda = Comanda.objects.create(carro = carritu, joc = joc_demanat, preuE = joc_demanat.preuE, preuG = joc_demanat.preuG)
+        carritu.preu_total += joc_demanat.preuE
+        carritu.preuG_total += joc_demanat.preuG
+        carritu.save()
+        return redirect("usuaris:menu_usuari") 
     
 def eliminar_comanda(request,id_comanda):
     comanda = Comanda.objects.get(id=id_comanda);
