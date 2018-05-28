@@ -15,12 +15,12 @@ window.onload = function() {
 	var score=0;
 	var scoreText;
      var topScore;
-     
+    var done=true
      var play = function(game){}
      
      play.prototype = {
 		preload:function(){
-			game.load.image("bird", "bird.png"); 
+			game.load.image("bird", "Flapp.png"); 
 			game.load.image("pipe", "pipe.png");	
 		},
 		create:function(){
@@ -47,6 +47,19 @@ window.onload = function() {
 			if(bird.y>game.height){
 				die();
 			}	
+			
+			if (score == 10){
+				if (done){
+					done=false;
+			        $.get("/Usuari/proba/2",
+			        function(data,status){
+			        	window.location.href = 'https://cmgames-raoh.c9users.io/Usuari/biblio/';
+			            alert(data);
+			        });
+				}
+			        
+    		};
+    		
 		}
 	}
      
@@ -96,4 +109,5 @@ window.onload = function() {
 			this.destroy();
 		}
 	};	
+	
 }

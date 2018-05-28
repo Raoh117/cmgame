@@ -16,24 +16,107 @@
 <div class="container theme-showcase info-usr" role="main">
   <center>
     <div id="contingut-reco">
-     <div class="container-fluid">
-                    <div class="row"> <!-- Give this div your desired background color -->
-                        <div class="container1">
+     <div class="container-fluid blanc">
+                    <div class="items blanc"> <!-- Give this div your desired background color, aqui anava page-header -->
+                    <h1>Com vols pagar?</h1>
+                        <div class=" item">
                             <div class="desc">
                                 <div id="content-login">
-                                    <h2 style="color:red">PREU:{{carretilla.preu_total}}</h2>
+                                    <h2 style="color:red">PREU:{{carretilla.preu_total}} €</h2>
                                     <p style="color:red">ACCEDEIX A PAYPAL</p>
                                     {{form.render}}
                                 </div>
                                 
                             </div>
                           </div>
-                          <div class="container1">
-                                  <div>
-                                    <h2> O AMB MONEDES: {{carretilla.preuG_total}}</h2>
+                          <div class=" item">
+                            <div class="desc">
+                                <div id="content-login">
+                                  <img style="height:50px;" src="{% static "images/Moneda_de_Oro.png" %}"> </img>
+                                    <h2 style="color:red">PREU G:{{carretilla.preuG_total}}</h2>
                                     <a href="{% url "usuaris:pagat" carretilla.pk %}" >Pagar amb G</a>
                                 </div>
+                                
+                            </div>
                           </div>
+                          <div class=" item margenbot">
+                            <div class="desc">
+                                <div id="content-login">
+                                    <h3 style="color:red">TARGETA DE CREDIT</h3>
+                                    <h3 style="color:red"> {{carretilla.preu_total}} €</h3>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Targeta
+                                    </button>
+                                </div>
+                            </div>
+                          </div>
+                          
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Targeta de credit</h5>
+                                    <button type="button" class="close" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    
+                                    <div class="creditCardForm">
+                                        <div class="heading">
+                                            <h1>Confirmar Compra</h1>
+                                        </div>
+                                        <div class="payment">
+
+                                                <div class="form-group owner">
+                                                    <label for="owner">Titular</label>
+                                                    <input type="text" class="form-control" id="owner">
+                                                </div>
+                                                <div class="form-group" id="card-number-field">
+                                                    <label for="cardNumber">Numero Targeta</label>
+                                                    <input type="text" class="form-control" id="cardNumber">
+                                                </div>
+                                                <div class="form-group" id="expiration-date">
+                                                    <label>Data de caducitat</label>
+                                                    <select>
+                                                        <option value="01">Gener</option>
+                                                        <option value="02">Febrer </option>
+                                                        <option value="03">Març</option>
+                                                        <option value="04">Abril</option>
+                                                        <option value="05">Maig</option>
+                                                        <option value="06">Juny</option>
+                                                        <option value="07">Juliol</option>
+                                                        <option value="08">Agost</option>
+                                                        <option value="09">Setembre</option>
+                                                        <option value="10">Octubre</option>
+                                                        <option value="11">Novembre</option>
+                                                        <option value="12">Desembre</option>
+                                                    </select>
+                                                    <select>
+                                                        <option value="18"> 2018</option>
+                                                        <option value="19"> 2019</option>
+                                                        <option value="20"> 2020</option>
+                                                        <option value="21"> 2021</option>
+                                                        <option value="22"> 2022</option>
+                                                        <option value="23"> 2023</option>
+                                                        <option value="24"> 2024</option>
+                                                        <option value="25"> 2025</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group" id="pay-now">
+                                                    <button class="btn btn-default" id="confirm-purchase">Confirmar</button>
+                                                </div>
+                                        </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <a href="{% url "usuaris:pagatC" carretilla.pk %}"><button type="button" id="Pag" class="btn btn-primary">Pagar</button></a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                     </div>
                     
                     <div>

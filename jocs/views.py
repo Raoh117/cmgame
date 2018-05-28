@@ -36,7 +36,7 @@ def crear_joc(request):
                                         descripcio=descripcio,
                                         imatge=imatge,)   
            messages.info(request,"joc pujat correctament")
-           return redirect("usuaris:menu_usuari")    
+           return redirect("usuaris:menu_usuari")  
     else:
         nova_id=Joc.objects.latest('id'); #Haig de sumar un, o baixar el contador general
         nova_id.id += 1
@@ -85,7 +85,7 @@ def eliminar_joc(request,id_joc=None):
             joc.delete()
             return redirect('usuaris:menu_usuari')
     else:
-        return render(request, 'jocs/eliminar_joc.html', {'Joc': Joc.objects.get(pk=id_jocs)})
+        return render(request, 'jocs/eliminar_joc.html', {'Joc': Joc.objects.get(pk=id_joc)})
                   
 from django.db.models import Q             
       
@@ -118,7 +118,7 @@ def fer_backups(request):
         sysout = sys.stdout
         nomFitxer = "backups/media/bdd-Backup" + str(datetime.datetime.now()).replace(" ","").replace(":","-")+".xml"
         sys.stdout = open (nomFitxer, 'w')
-        call_command('dumpdata',indent=2,format='xml')
+        call_command('dumpdata','jocs',indent=2,format='xml')
         sys.stdout = sysout
         return HttpResponseRedirect(reverse('jocs:index'))
     else:

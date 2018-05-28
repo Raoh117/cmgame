@@ -29,6 +29,7 @@
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
             {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
             <!--formulari - METHOD:GET --> 
@@ -130,17 +131,58 @@
                   </ol>
                 
                   <!-- Wrapper for slides -->
-                  <div class="carousel-inner">
-                    <div class="item active peopleCarouselImg">
-                        <img src="{% static "images/Imatge.png" %}">
-                    </div>
-                    <div class="item peopleCarouselImg">
-                      <img src="{% static "images/Imatge.png" %}">
-                    </div>
-                    <div class="item peopleCarouselImg">
-                      <img src="{% static "images/Imatge.png" %}">
-                    </div>
-                  </div> 
+                  {% if joc.id == 1 %} <!--Try and Replay-->
+                      <div class="carousel-inner">
+                        <div class="item active peopleCarouselImg" style="height: 180px;">
+                            <img src="{% static "images/TryAndReplay1.png" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height: 180px;">
+                          <img src="{% static "images/TryAndReplayA.png" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/TryAndReplayB.png" %}">
+                        </div>
+                      </div> 
+                  {% endif %}
+                  {% if joc.id == 2 %} <!--Flappy Bird-->
+                      <div class="carousel-inner"> 
+                        <div class="item active peopleCarouselImg" style="height:180px;">
+                            <img src="{% static "images/flappy-birdA.png" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/flappy-birdB.png" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/flappy-birdD.png" %}">
+                        </div>
+                      </div> 
+                  {% endif %}
+                  {% if joc.id == 4 %} <!--Dark Matter-->
+                      <div class="carousel-inner">
+                        <div class="item active peopleCarouselImg" style="height:180px;">
+                            <img src="{% static "images/DarkMatterA.JPG" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/DarkMatterB.JPG" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/DarkMatterC.JPG" %}">
+                        </div>
+                      </div> 
+                  {% endif %}
+                  {% if joc.id == 5 %} <!--The Terror-->
+                      <div class="carousel-inner">
+                        <div class="item active peopleCarouselImg" style="height:180px;">
+                            <img src="{% static "images/TheTerrorA.JPG" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/TheTerrorB.JPG" %}">
+                        </div>
+                        <div class="item peopleCarouselImg" style="height:180px;">
+                          <img src="{% static "images/TheTerrorC.JPG" %}">
+                        </div>
+                      </div> 
+                  {% endif %}
                   <!-- Left and right controls -->
                    <div class="carousel-inner">
                     <d<a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -155,8 +197,8 @@
             </div>
             {% if user.is_authenticated %}<center><a href="{% url "usuaris:afegir_al_carritu" joc.pk %}"><button type="button" class="btn btn-success btnComprar">Comprar</button></a></center>{% endif %}
 
-            {% if user.usuari.admin %}<a href="{% url "jocs:editar_joc" joc.pk %}"><button type="button" class="btn btn-warning boto-cntc">Modificar</button></a>{% endif %}
-            {% if user.usuari.admin %}<a href="{% url "jocs:eliminar_joc" joc.pk %}"><button type="button" class="btn btn-danger boto-cntc">Esborrar</button></a>{% endif %}
+            {% if user.usuari.admin %}<center><a href="{% url "jocs:editar_joc" joc.pk %}"><button type="button" class="btn btn-warning btnComprar">Modificar</button></a></center>{% endif %}
+            {% if user.usuari.admin %}<center><a href="{% url "jocs:eliminar_joc" joc.pk %}"><button type="button" class="btn btn-danger btnComprar">Esborrar</button></a></center>{% endif %}
             <div></div>
          </div>
      </div>

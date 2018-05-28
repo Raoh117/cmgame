@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object model="jocs.joc" pk="1">
+    <field name="nom" type="CharField">Try and Replay</field>
+    <field name="preuE" type="DecimalField">0.99</field>
+    <field name="preuG" type="IntegerField">100</field>
+    <field name="imatge" type="FileField">jocs/Imatge.png</field>
+    <field name="descripcio" type="TextField">Tens ganes de posar-te a prova? Llavors, prova aquest joc i intenta superar-lo... si pots! :)</field>
+  </object>
+  <object model="jocs.joc" pk="2">
+    <field name="nom" type="CharField">Flappy Birdo</field>
+    <field name="preuE" type="DecimalField">0.99</field>
+    <field name="preuG" type="IntegerField">100</field>
+    <field name="imatge" type="FileField">jocs/21ZzpgClpiL_qsH5ugl.png</field>
+    <field name="descripcio" type="TextField">Ya pensare en algo</field>
+  </object>
+  <object model="jocs.joc" pk="4">
+    <field name="nom" type="CharField">Platform Master</field>
+    <field name="preuE" type="DecimalField">1.99</field>
+    <field name="preuG" type="IntegerField">200</field>
+    <field name="imatge" type="FileField">jocs/PlatformMaster.png</field>
+    <field name="descripcio" type="TextField">Ooooh yeah, the new and super hyper mega ultra platform from EA! Buy it"</field>
+  </object>
+  <object model="jocs.joc" pk="5">
+    <field name="nom" type="CharField">The Terror</field>
+    <field name="preuE" type="DecimalField">0.99</field>
+    <field name="preuG" type="IntegerField">100</field>
+    <field name="imatge" type="FileField">jocs/TheTerror.png</field>
+    <field name="descripcio" type="TextField">El perill t'espera a cada racó d'aquest angoixant joc...sobreviuràs?</field>
+  </object>
+  <object model="jocs.comprat" pk="1">
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.usuari">3</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">1</field>
+    <field name="completat" type="BooleanField">False</field>
+  </object>
+  <object model="jocs.comprat" pk="2">
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.usuari">5</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">1</field>
+    <field name="completat" type="BooleanField">True</field>
+  </object>
+  <object model="jocs.comprat" pk="3">
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.usuari">4</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">1</field>
+    <field name="completat" type="BooleanField">False</field>
+  </object>
+  <object model="jocs.comprat" pk="4">
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.usuari">5</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">2</field>
+    <field name="completat" type="BooleanField">True</field>
+  </object>
+  <object model="jocs.comprat" pk="5">
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.usuari">5</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">4</field>
+    <field name="completat" type="BooleanField">True</field>
+  </object>
+  <object model="jocs.comprat" pk="6">
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.usuari">5</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">5</field>
+    <field name="completat" type="BooleanField">False</field>
+  </object>
+</django-objects>

@@ -26,6 +26,7 @@
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
             {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
             <!--formulari - METHOD:GET --> 
@@ -85,7 +86,8 @@
               {% for jocs in comandes %}
                  <div class="container-fluid">
                     <div class="row"> <!-- Give this div your desired background color -->
-                        <div class="container">
+                      <div class="container itemC">
+                        <div class="remove"><a class="editting" href="{% url "usuaris:eliminar_comanda" jocs.pk %}"><small><span class="glyphicon glyphicon-remove" title="Esborrar disc" ></span></small></a></div>
                           <div class="row">
                               <div class="col-md-6 laimatge">
                                 <center><a href="{% url "jocs:joc" jocs.joc.pk %}"><img src="{% if jocs.joc.imatge %}{{ jocs.joc.imatge.url }}{% endif%}" class="img-responsive" ></a></center> <!--anava aqui un hr -->
@@ -111,41 +113,10 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                  {% endfor %} 
 
-            
-            <!-- Modal borrar-->
-            <div id="myModalB" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Esteu segurs que vols esborrar aquest disc?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                              <p>Si esborreu aquest disc desapereixarà del vostre cataleg, i no podrà ser comprat</p>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">No, no esborris</button>
-                            <button type="button" class="pesao btn btn-success">Sí, esborra el disc</button>
-                        </div>
-                        <div class="modal-footer amagat">
-                            <p>Si us plau,ens seria molt útil saber perque esborres aquest disc. Si l'has venut, la venta pot millorar la teva imatge davant les properes transaccions</p>
-                            <form action="#">
-                              <input type="radio" name="estat" value="venut" checked="checked"> He venut aquest disc<br>
-                              <input type="radio" name="estat" value="borrat"> Ja no el vull vendre<br>
-                              <button class="OK" type="button" data-dismiss="modal" >OK</button>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
             </div>
     </div>
 

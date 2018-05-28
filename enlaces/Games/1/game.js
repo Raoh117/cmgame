@@ -6,6 +6,7 @@ var jumpButton;
 var layer;
 var text;
 var contador=0;
+var done = true;
 var nivells=0;
 var monedes=0;
 var seguent=false;
@@ -418,22 +419,23 @@ var mainState = {
                     jumpTimer = game.time.now + 750;
             }
             
-            
+            if (nivells == 5){
+				if (done){
+				    done=false;
+			        $.get("/Usuari/proba/1",
+			        function(data,status){
+			            window.location.href = 'https://cmgames-raoh.c9users.io/Usuari/biblio/';
+			            alert(data);
+			        });
+				}
+			        
+    		};
         }
         
         
   
 };
 
-$(document).ready(function(){
-    $("button").click(function(){
-        alert("A");
-        $.get("/Usuari/proba/1",
-        function(data,status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });
-    });
-});
             
 var game = new Phaser.Game(1250, 600), behaviorPlugin;
 game.state.add('main', mainState);

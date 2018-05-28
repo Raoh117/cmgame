@@ -1,17 +1,18 @@
 {% extends "base.html" %}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
 
-  {% block title %} Editar disc {% endblock %}
+{% block title %} Modificar dades {% endblock %}
 
 {% block extra-head %}
-  {% load static %}
-    <script src="{% static "js/afegir_disc.js" %}"></script>
-<link href="{% static "css/afegir-disc.css" %}" rel="stylesheet">
-<link href="{% static "css/SignUp.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
-<link href="{% static "css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
-
+  {% load static %}  
+  <link href="{% static "css/SignUp.css" %}" rel="stylesheet">
+  <script src="{% static "js/ModiUsu.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -83,30 +84,11 @@
          </div><!--/.nav-collapse -->
         </div> 
      </nav>
-
-        
-        
-        
         
         <div class="contingut-usr">
-    
-          <div class="row usr-menu">
-           
-            <div class="col-xs-3">
-                <div class="panel panel-default menu-usr">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Menú</div>
-                <!-- List group -->
-                  <div class="list-group">
-                    <a href="{% url "usuaris:menu_usuari" %}" class="list-group-item"><span class="glyphicon glyphicon-user"></span> Menú</a>
-                  </div>
-              </div>
-              </div>
-              </div>
-              
-              <div class="row add disc">
-                <div class="contingut-disc">
-                    <div id="titol-puja"><h3>Editar Joc</h3></div>
+          <div class="row add paddedit">
+             <div id="titol-puja"><h3>Editar Joc</h3></div>
+             <div class="inforr">
                   
                       <div id="columna-disc">
                         <form id="puja-disc" method ="post" action="" enctype = "multipart/form-data">
@@ -129,40 +111,43 @@
                 		         	</div>
                 		        {% endif %}
                          {% endfor %}  
-
-                     
-                     
-                     
-                        <div id="pujar">
-                           
-                            <div class="checkbox">
-                              <label><input type="checkbox" value="">Estic disposat a negociar</label>
-                            </div>
-                            <div class="checkbox">
-                              <label><input type="checkbox" value="">Estic disposat a fer enviaments</label>
-                            </div>
-                            <div class="checkbox">
-                              <label><input type="checkbox" value="">Estic disposat a intercanviar vinils</label>
-                            </div>
-                            
-                            <div id="botons-disc">
-                              <button type="submit" class="btn btn-success envia">Enviar</button>
-                           </div>
-                        </div>
-                      </form>
-                    </div>  
-                  </div>
-               </div>
-                          
-                
-                   
+                   <!--
+                 {% for field in formPerfil.visible_fields %}
+  	              <div class="form-group">
+                    {{ field }}
                     
+      	            {% if field.help_text %}
+      	              <p class="hidden-xs"><em>{{ field.help_text }}</em></p> 
+      	            {% endif %}
+        		        {% if field.errors %}		        	
+        			        <div class="alert alert-danger">
+        			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        				        <ul>
+        				          {% for error in field.errors%}
+        				          <li>{{ error }}</li>
+        			            {% endfor %}
+        			          </ul>
+        		         	</div>
+        		        {% endif %}
+      	        </div>        
+               {% endfor %}-->    
+                <br><br>
+                 <!-- <div class="g-recaptcha boot" data-sitekey="6Le8-xUUAAAAAEaaToGX4VZV_DPLvLK4C0PJnUQX"></div>-->
+                 <br><br>
+                  <button id="botoncito" type="submit" class="formulari boto btn btn-success"><span class=" glyphicon glyphicon-floppy-disk"></span> Guardar canvis</button>
+                 <br />
+                </form> 
               </div>
-            
-             
+            </div>
+        </div>
+      </div>
 
-    </div>
 
-    
-        
 {% endblock %}
+
+{% block extra-body %}
+  {% load static %}
+
+{% endblock %}
+
+

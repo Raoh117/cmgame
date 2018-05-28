@@ -145,12 +145,11 @@ def proba(request, id_joc):
     joc = Joc.objects.get(id=id_joc)
     compra = get_object_or_404(Comprat,joc=joc,usuari = usuari)
     if compra:
-        compra.completat = True
-        compra.save()
-        usuari.monedes +=100
-        usuari.save()
-    print(usuari.usuari)
-    print(joc.nom)
+        if not compra.completat:
+            compra.completat = True
+            compra.save()
+            usuari.monedes +=100
+            usuari.save()
     return HttpResponse("Enhorabona")
 
 def jugar(request,id_joc):
@@ -224,8 +223,6 @@ def modificar_perfil(request):
     formUsuari.fields['first_name'].widget.attrs['placeholder']="Nom"
     formUsuari.fields['last_name'].widget.attrs['placeholder']="Cognoms"
     formUsuari.fields['first_name'].widget.attrs['placeholder']="email"
-    #formPerfil.fields['direccio'].widget.attrs['placeholder']="direccio"
-    #formPerfil.fields['compte'].widget.attrs['placeholder']="compte"
     
     return render(request, 'modificar_usuari.html', { 'formUsuari': formUsuari } )
                                                      
@@ -303,10 +300,25 @@ def pagat(request, id_carritu):
         carretbuit.preuG_total = 0
         carretbuit.save()
         
-        return redirect('usuaris:menu_usuari')
+        return redirect('usuaris:biblioteca')
     else:
         messages.error(request,"No tens les monedes necesaries")
         return redirect('usuaris:menu_usuari')
      
+def pagatC(request, id_carritu):
+    carretbuit=Carret.objects.get(id=id_carritu) #Carro amb comandes
+    usuari = Usuari.objects.get(usuari=carretbuit.usuari) #Usuari del carro
+    #agafar els jocs i deixar-los en comprats
+    elsjocs = Comanda.objects.filter(carro=carretbuit)
+    for joc in elsjocs:
+        nou_comprat = Comprat.objects.create( usuari = usuari, joc = joc.joc , completat= False)
+            
+    comandes=Comanda.objects.filter(carro=carretbuit).delete()
+    carretbuit.preu_total = 0
+    carretbuit.preuG_total = 0
+    carretbuit.save()
+        
+    return redirect('usuaris:biblioteca')
 
+     
 

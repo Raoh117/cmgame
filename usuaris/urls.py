@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'(?P<id_comanda>\d+)/eliminar_comanda/$', views.eliminar_comanda, name="eliminar_comanda"),
     url(r'(?P<id_carritu>\d+)/paypal/$', views.view_that_asks_for_money,name="view_that_asks_for_money"),
     url(r'(?P<id_carritu>\d+)/pagat/$', views.pagat,name="pagat"),
+    url(r'(?P<id_carritu>\d+)/pagatC/$', views.pagatC,name="pagatC"),
 ]
