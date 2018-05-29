@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^crear_joc/$', views.crear_joc, name="crear_joc"),
     url(r'(?P<id_joc>\d+)/eliminar_joc/$', views.eliminar_joc, name="eliminar_joc"),
     url(r'(?P<id_joc>\d+)/editar_joc/$', views.editar_joc, name="editar_joc"),
-    url(r'^fer_backups/$', views.fer_backups, name='fer_backups'),
+    url(r'(?P<id_backup>\d+)/fer_backups/$', views.fer_backups, name='fer_backups'),
 ]

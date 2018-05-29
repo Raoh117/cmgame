@@ -13,6 +13,21 @@ body{
     margin:auto;
 }
 
+.flecha-left{
+    width:0px;
+    height:0px;
+    border-bottom:25px solid transparent;  /* izquierda flecha */
+    border-top:25px solid transparent; /* derecha flecha */
+    border-right:75px solid #FF0000; /* base flecha y color*/
+    font-size:0px;
+    line-height:0px;
+}
+
+#esquina{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
 #try{
     margin:auto;
     justify-content: center;

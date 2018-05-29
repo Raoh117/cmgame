@@ -34,7 +34,6 @@ $(document).ready(function(){
 	$('#confirm-purchase').click(function(){
 		// accept only digits, dashes or spaces
 		var value=$('#cardNumber').val();
-		alert(value);
 		if (/[^0-9-\s]+/.test(value)) return false;
 		
 		// The Luhn Algorithm. It's so pretty.
@@ -43,7 +42,6 @@ $(document).ready(function(){
 			        sum += ((even = !even) ? d : (d < 5) ? d * 2 : (d - 5) * 2 + 1);
 			      });
 			      
-			     alert(sum % 10 == 0)
 			    if(sum % 10 == 0){
 			    	alert("Targeta correcte");
 			    	correcte = true;

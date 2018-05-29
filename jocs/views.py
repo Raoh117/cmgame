@@ -62,7 +62,8 @@ def editar_joc(request, id_joc):
         if form.is_valid():
            form.save()
            messages.info(request,"Joc canviat correctament")
-           return redirect("usuaris:menu_usuari")    
+           ctx={'joc': unEdit}
+           return render(request,"jocs/joc.html",ctx)
     else:
         form= EditForm (instance = unEdit)
     
@@ -113,12 +114,19 @@ import datetime
 import sys
 
 @login_required
-def fer_backups(request):
+def fer_backups(request, id_backup):
     if (request.user.usuari.admin):
+        objectiu = ''
+        if id_backup == '1':
+            objectiu = 'comandes'
+        if id_backup == '2':
+            objectiu = 'usuaris'
+        if id_backup == '3':
+            objectiu = 'jocs'
         sysout = sys.stdout
         nomFitxer = "backups/media/bdd-Backup" + str(datetime.datetime.now()).replace(" ","").replace(":","-")+".xml"
         sys.stdout = open (nomFitxer, 'w')
-        call_command('dumpdata','jocs',indent=2,format='xml')
+        call_command('dumpdata',objectiu,indent=2,format='xml')
         sys.stdout = sysout
         return HttpResponseRedirect(reverse('jocs:index'))
     else:

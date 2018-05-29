@@ -39,8 +39,8 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
-            {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
-            {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a data-toggle="modal" data-target="#contact" href=""> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li ><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
             <!--formulari - METHOD:GET --> 
@@ -111,10 +111,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active peopleCarousel">
-              <a href="{% url "jocs:joc" 1%}"><img src="{% static "images/Espacial.png" %}" alt="Los Angeles"></a>
+              <a href="{% url "jocs:joc" 4%}"><img src="{% static "images/Espacial.png" %}" alt="Los Angeles"></a>
             </div>
             <div class="item peopleCarousel">
-              <a href="{% url "jocs:joc"  4%}"><img src="{% static "images/TryAndReplayA.png" %}" alt="Chicago"></a>
+              <a href="{% url "jocs:joc" 1%}"><img src="{% static "images/TryAndReplayA.png" %}" alt="Chicago"></a>
             </div>
             <div class="item peopleCarousel">
               <a href="{% url "jocs:joc"  2%}"><img src="{% static "images/flappybird.jpg" %}" alt="New York"></a>
@@ -165,44 +165,26 @@
         </div>
      </div>-->
      
-     {% if user.is_authenticated %}
+     {% if user.usuari.admin %}
      <div id="contact" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title titol-modal">Enviar missatge a </h4>
+                            <h4 class="modal-title titol-modal" style="color:black">BACKUP </h4>
                         </div>
                         <div class="modal-body">
-                            <textarea rows="4" cols="50"></textarea>
+                            <a href="{% url "jocs:fer_backups" 1%}"><button type="button" class="btn btn-primary btnComprar">Comandes</button></a>
+                            <a href="{% url "jocs:fer_backups" 2%}"><button type="button" class="btn btn-warning btnComprar">Usuaris</button></a>
+                            <a href="{% url "jocs:fer_backups" 3%}"><button type="button" class="btn btn-info btnComprar">Jocs</button></a>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel·lar</button>
-                            <button id="YES" type="button" class="okReservar btn btn-success" data-dismiss="modal">Enviar</button>
                         </div>
                     </div>
 
                 </div>
-    </div>
-    {% else %}
-    <div id="contact" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="form-group">
-                              <center><font color="black">Inicia sessió per contactar amb aquest usuari!</font></center>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Sortir</button>
-                            <a href="#"> <button id="YES" type="button" class="okReservar btn btn-success">Loguejar-se</button></a>
-                            
-                        </div>
-                    </div>
-
     </div>
     {% endif %}
     </nav>

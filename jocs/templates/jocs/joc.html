@@ -28,7 +28,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
-            {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a data-toggle="modal" data-target="#contact" href=""> BACKUP </a></li>{% endif %}
             {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
@@ -202,7 +202,28 @@
             <div></div>
          </div>
      </div>
-      
+      {% if user.usuari.admin %}
+     <div id="contact" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title titol-modal" style="color:black">BACKUP </h4>
+                        </div>
+                        <div class="modal-body">
+                            <a href="{% url "jocs:fer_backups" 1%}"><button type="button" class="btn btn-primary btnComprar">Comandes</button></a>
+                            <a href="{% url "jocs:fer_backups" 2%}"><button type="button" class="btn btn-warning btnComprar">Usuaris</button></a>
+                            <a href="{% url "jocs:fer_backups" 3%}"><button type="button" class="btn btn-info btnComprar">Jocs</button></a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel·lar</button>
+                        </div>
+                    </div>
+
+                </div>
+    </div>
+    {% endif %}
 </div>
 
 

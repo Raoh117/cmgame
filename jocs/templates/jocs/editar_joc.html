@@ -31,7 +31,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
-            {% if user.usuari.admin %}<li><a href="{% url "jocs:fer_backups" %}"> BACKUP </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a data-toggle="modal" data-target="#contact" href=""> BACKUP </a></li>{% endif %}
             <li class="margentop">
             <!--<div class=" input-group input-header">--> 
             <!--formulari - METHOD:GET --> 
@@ -141,8 +141,6 @@
             </div>
         </div>
       </div>
-
-
 {% endblock %}
 
 {% block extra-body %}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object model="comandes.carret" pk="1">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">1</field>
+    <field name="preu_total" type="DecimalField">0.99</field>
+    <field name="preuG_total" type="IntegerField">100</field>
+  </object>
+  <object model="comandes.carret" pk="2">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">7</field>
+    <field name="preu_total" type="DecimalField">0.00</field>
+    <field name="preuG_total" type="IntegerField">100</field>
+  </object>
+  <object model="comandes.carret" pk="3">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">8</field>
+    <field name="preu_total" type="DecimalField">0.00</field>
+    <field name="preuG_total" type="IntegerField">0</field>
+  </object>
+  <object model="comandes.carret" pk="4">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">9</field>
+    <field name="preu_total" type="DecimalField">0.00</field>
+    <field name="preuG_total" type="IntegerField">0</field>
+  </object>
+  <object model="comandes.carret" pk="5">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">10</field>
+    <field name="preu_total" type="DecimalField">0.00</field>
+    <field name="preuG_total" type="IntegerField">0</field>
+  </object>
+  <object model="comandes.carret" pk="6">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">11</field>
+    <field name="preu_total" type="DecimalField">0.00</field>
+    <field name="preuG_total" type="IntegerField">0</field>
+  </object>
+  <object model="comandes.comanda" pk="13">
+    <field name="carro" rel="ManyToOneRel" to="comandes.carret">1</field>
+    <field name="joc" rel="ManyToOneRel" to="jocs.joc">1</field>
+    <field name="preuE" type="DecimalField">0.99</field>
+    <field name="preuG" type="IntegerField">100</field>
+    <field name="data" type="DateField">2018-05-14</field>
+  </object>
+</django-objects>

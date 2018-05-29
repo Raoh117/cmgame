@@ -4,13 +4,8 @@
 
 {% block extra-head %}
 {% load static %}
-<script src="{% static "js/afegir_disc.js" %}"></script>
-<link href="{% static "css/afegir-disc.css" %}" rel="stylesheet">
-<link href="{% static "css/SignUp.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
-<link href="{% static "css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+  <link href="{% static "css/SignUp.css" %}" rel="stylesheet">
+  <script src="{% static "js/ModiUsu.js" %}"></script>
 
 
 {% endblock %}
@@ -31,6 +26,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url "jocs:index"%}">Inici</a></li>
             {% if user.usuari.admin %}<li><a href="{% url "jocs:crear_joc" %}"> Crear Joc </a></li>{% endif %}
+            {% if user.usuari.admin %}<li><a data-toggle="modal" data-target="#contact" href=""> BACKUP </a></li>{% endif %}
             {% if user.usuari.admin %}<li><a href="{% url "usuaris:crear_admin" %}"> Crear Admin </a></li>{% endif %}
             <li><div class="input-group input-header">
             <!--formulari - METHOD:GET --> 
@@ -88,19 +84,16 @@
      
         <div class="contingut-usr">
     
-              
-              <div class="row add disc">
-                <div class="contingut-disc">
-                    <div id="titol-puja"><h3>Pujar Joc Nº  {{nova_id.id}}</h3></div>
-
-                    <div id="img-dsk"></div>
-
-
+              <div class="row add paddedit">
+             <div id="titol-puja"><h3>Crear Joc</h3></div>
+             <div class="inforr">
+                  
+                      <div id="columna-disc">
                         <form id="puja-disc" method ="post" action="" enctype = "multipart/form-data">
-                         {% csrf_token %}
                          {% for field in form.visible_fields %}
+                             {% csrf_token %}
                       	    <div class="form-group">
-                               {{ field.label_tag }}                      	             
+                                   	             
                                {{ field }}
                             </div>
                                 
@@ -115,19 +108,59 @@
                 			            </ul>
                 		         	</div>
                 		        {% endif %}
-                        {% endfor %}  
-
-                     
-                     
-                     
-                        <div id="pujar">
-                           
-                            <div id="botons-disc">
-                              <button type="submit" class="btn btn-success envia">Enviar</button>
-                           </div>
+                         {% endfor %}  
+                   <!--
+                 {% for field in formPerfil.visible_fields %}
+  	              <div class="form-group">
+                    {{ field }}
+                    
+      	            {% if field.help_text %}
+      	              <p class="hidden-xs"><em>{{ field.help_text }}</em></p> 
+      	            {% endif %}
+        		        {% if field.errors %}		        	
+        			        <div class="alert alert-danger">
+        			        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        				        <ul>
+        				          {% for error in field.errors%}
+        				          <li>{{ error }}</li>
+        			            {% endfor %}
+        			          </ul>
+        		         	</div>
+        		        {% endif %}
+      	        </div>        
+               {% endfor %}-->    
+                <br><br>
+                 <!-- <div class="g-recaptcha boot" data-sitekey="6Le8-xUUAAAAAEaaToGX4VZV_DPLvLK4C0PJnUQX"></div>-->
+                 <br><br>
+                  <button id="botoncito" type="submit" class="formulari boto btn btn-success"><span class=" glyphicon glyphicon-floppy-disk"></span> Guardar canvis</button>
+                 <br />
+                </form> 
+              </div>
+            </div>
+        </div>
+        
+    {% if user.usuari.admin %}
+     <div id="contact" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title titol-modal" style="color:black">BACKUP </h4>
                         </div>
-                      </form>
-                    </div>  
-                  </div>
+                        <div class="modal-body">
+                            <a href="{% url "jocs:fer_backups" 1%}"><button type="button" class="btn btn-primary btnComprar">Comandes</button></a>
+                            <a href="{% url "jocs:fer_backups" 2%}"><button type="button" class="btn btn-warning btnComprar">Usuaris</button></a>
+                            <a href="{% url "jocs:fer_backups" 3%}"><button type="button" class="btn btn-info btnComprar">Jocs</button></a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel·lar</button>
+                        </div>
+                    </div>
+
+                </div>
+    </div>
+    {% endif %}      
 
 {% endblock %}
+
