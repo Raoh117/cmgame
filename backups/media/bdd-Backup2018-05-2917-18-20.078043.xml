@@ -30,6 +30,11 @@
     <field name="preu_total" type="DecimalField">0.00</field>
     <field name="preuG_total" type="IntegerField">0</field>
   </object>
+  <object model="comandes.carret" pk="7">
+    <field name="usuari" rel="ManyToOneRel" to="auth.user">12</field>
+    <field name="preu_total" type="DecimalField">0.00</field>
+    <field name="preuG_total" type="IntegerField">0</field>
+  </object>
   <object model="comandes.comanda" pk="13">
     <field name="carro" rel="ManyToOneRel" to="comandes.carret">1</field>
     <field name="joc" rel="ManyToOneRel" to="jocs.joc">1</field>

@@ -4,6 +4,7 @@ from .forms import JocForm
 from django.forms import modelform_factory
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -18,7 +19,7 @@ def joc(request,id_joc):
     ctx={'joc': joc}
     return render(request,"jocs/joc.html",ctx)
     
-        
+@login_required (login_url='jocs:index') 
 def crear_joc(request):
     if request.method == 'POST':
         form = JocForm(request.POST,request.FILES)
@@ -48,7 +49,7 @@ def crear_joc(request):
     return render (request, 'jocs/crear_joc.html', {'form': form, "nova_id":nova_id} )   
     
     
-   
+@login_required (login_url='jocs:index')
 def editar_joc(request, id_joc):
     EditForm = modelform_factory(Joc, fields=('nom','preuE','preuG','imatge','descripcio'))
     unEdit = Joc()
@@ -77,7 +78,7 @@ def editar_joc(request, id_joc):
     
     return render (request, 'jocs/editar_joc.html', {'form': form} )    
     
-   
+@login_required (login_url='jocs:index')  
 def eliminar_joc(request,id_joc=None):
     
     if request.method == 'POST':
@@ -90,7 +91,7 @@ def eliminar_joc(request,id_joc=None):
                   
 from django.db.models import Q             
       
-                               
+                        
 def search(request):
     query = request.GET.get('q', '')
     if query:
@@ -108,12 +109,11 @@ def search(request):
 from django.core.urlresolvers import reverse
 from django.http import *
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.core.management import call_command
 import datetime
 import sys
 
-@login_required
+@login_required (login_url='jocs:index')
 def fer_backups(request, id_backup):
     if (request.user.usuari.admin):
         objectiu = ''

@@ -19,6 +19,7 @@ from django.contrib.auth import ( login as authLogin,
 from django.contrib import messages
 # Create your views here.
 
+
 def crear_usuari(request, perfil_id=None):
     
     if request.method == 'POST':
@@ -39,7 +40,7 @@ def crear_usuari(request, perfil_id=None):
                 usuari.monedes = 100
                 usuari.save()
                 messages.info(request,"Usuari creat correctament")
-                return redirect('jocs:index')
+                return redirect('usuaris:login')
     else:
         form = nou_usuari_form()
     
@@ -54,7 +55,7 @@ def crear_usuari(request, perfil_id=None):
     return render(request, 'crear_usuari.html', {'form': form,} )
     
     
-    
+@login_required (login_url='jocs:index')
 def crear_admin(request, perfil_id=None):
     
     if request.method == 'POST':
@@ -127,13 +128,15 @@ def login(request):
 def logout(request):
     authLogout( request )
     return redirect( 'jocs:index')
-    
+
+@login_required (login_url='jocs:index')   
 def menu_usuari(request): #Aixo es el carrito de la compra
     carritu = Carret.objects.get(usuari=request.user)
     comandes = Comanda.objects.filter(carro=carritu)
     ctx={"comandes":comandes,"carritu":carritu}
     return render(request,"menu_usuari.html",ctx)
-    
+
+@login_required (login_url='jocs:index')   
 def biblioteca(request):
     usuari = Usuari.objects.get(usuari=request.user)
     biblio = Comprat.objects.filter(usuari=usuari)
@@ -164,7 +167,7 @@ def jugar(request,id_joc):
         #return redirect(url)
     else:
         return redirect('usuaris:biblioteca')
-    
+@login_required (login_url='jocs:index')    
 def afegir_al_carritu(request, id_joc):
     carritu = Carret.objects.get(usuari=request.user)
     joc_demanat=Joc.objects.get(id=id_joc)
@@ -178,7 +181,7 @@ def afegir_al_carritu(request, id_joc):
         carritu.preuG_total += joc_demanat.preuG
         carritu.save()
         return redirect("usuaris:menu_usuari") 
-    
+@login_required (login_url='jocs:index')  
 def eliminar_comanda(request,id_comanda):
     comanda = Comanda.objects.get(id=id_comanda);
     carritu = Carret.objects.get(id=comanda.carro.pk)
@@ -194,7 +197,7 @@ def eliminar_comanda(request,id_comanda):
     carritu.save()
     comanda.delete()
     return redirect('usuaris:menu_usuari')
-
+@login_required (login_url='jocs:index')
 def modificar_perfil(request):
     usuariForm = modelform_factory(User,fields=("first_name","last_name","email"))
     unPerfil = request.user.usuari
